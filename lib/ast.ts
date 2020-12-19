@@ -173,12 +173,97 @@ export type _TriggerStmt = UpdateStmt | InsertStmt | DeleteStmt | SelectStmt;
 export type _UnaryOperator = string;
 
 /*
- * Internal nodes
+ * SQLite aliases
  * -------------------------------------------------------------------------------------------------
  */
 
+export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
+
+export type JoinOperator =
+  | ','
+  | 'JOIN'
+  | 'LEFT OUTER JOIN'
+  | 'LEFT JOIN'
+  | 'INNER JOIN'
+  | 'CROSS JOIN'
+  | 'NATURAL JOIN'
+  | 'NATURAL LEFT OUTER JOIN'
+  | 'NATURAL LEFT JOIN'
+  | 'NATURAL INNER JOIN'
+  | 'NATURAL CROSS JOIN';
+
+export type Node =
+  | AggregateFunctionInvocation
+  | AlterTableStmt
+  | AnalyzeStmt
+  | AttachStmt
+  | BeginStmt
+  | ColumnConstraint
+  | ColumnDef
+  | ColumnNameList
+  | CommitStmt
+  | CommonTableExpression
+  | CompoundSelectStmt
+  | ConflictClause
+  | CreateIndexStmt
+  | CreateTableStmt
+  | CreateTriggerStmt
+  | CreateViewStmt
+  | CreateVirtualTableStmt
+  | CteTableName
+  | DeleteStmt
+  | DetachStmt
+  | DropIndexStmt
+  | DropTableStmt
+  | DropTriggerStmt
+  | DropViewStmt
+  | Expr
+  | FactoredSelectStmt
+  | FilterClause
+  | ForeignKeyClause
+  | FrameSpec
+  | IndexedColumn
+  | InsertStmt
+  | JoinClause
+  | JoinConstraint
+  | LiteralValue
+  | NumericLiteral
+  | OrderingTerm
+  | OverClause
+  | PragmaStmt
+  | PragmaValue
+  | QualifiedTableName
+  | RaiseFunction
+  | RecursiveCte
+  | ReindexStmt
+  | ReleaseStmt
+  | ResultColumn
+  | RollbackStmt
+  | SavepointStmt
+  | SelectStmt
+  | SimpleFunctionInvocation
+  | SimpleSelectStmt
+  | SqlStmt
+  | SqlStmtList
+  | TableConstraint
+  | TableOrSubquery
+  | TypeName
+  | UpdateStmt
+  | UpsertClause
+  | VacuumStmt
+  | WindowDefn
+  | WindowFunctionInvocation
+  | WithClause;
+
+export type SelectCore = _SelectClause | _ValuesClause;
+
+/*
+  * Internal nodes
+  * -------------------------------------------------------------------------------------------------
+  */
+
 export type _AddClause = {
-  type: '_AddColumnClause';
+  type: '_AddClause';
   columnDef: ColumnDef;
 };
 
@@ -445,7 +530,7 @@ export type _PrimaryKeyConstraint = {
 };
 
 export type _ReindexNameClause = {
-  type: '_ReindexTargetClause';
+  type: '_ReindexNameClause';
   name: [string, string] | string;
 };
 
@@ -567,94 +652,9 @@ export type _WindowAsClause = {
 };
 
 /*
- * SQLite aliases
- * -------------------------------------------------------------------------------------------------
- */
-
-export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
-
-export type JoinOperator =
-  | ','
-  | 'JOIN'
-  | 'LEFT OUTER JOIN'
-  | 'LEFT JOIN'
-  | 'INNER JOIN'
-  | 'CROSS JOIN'
-  | 'NATURAL JOIN'
-  | 'NATURAL LEFT OUTER JOIN'
-  | 'NATURAL LEFT JOIN'
-  | 'NATURAL INNER JOIN'
-  | 'NATURAL CROSS JOIN';
-
-export type Node =
-  | AggregateFunctionInvocation
-  | AlterTableStmt
-  | AnalyzeStmt
-  | AttachStmt
-  | BeginStmt
-  | ColumnConstraint
-  | ColumnDef
-  | ColumnNameList
-  | CommitStmt
-  | CommonTableExpression
-  | CompoundSelectStmt
-  | ConflictClause
-  | CreateIndexStmt
-  | CreateTableStmt
-  | CreateTriggerStmt
-  | CreateViewStmt
-  | CreateVirtualTableStmt
-  | CteTableName
-  | DeleteStmt
-  | DetachStmt
-  | DropIndexStmt
-  | DropTableStmt
-  | DropTriggerStmt
-  | DropViewStmt
-  | Expr
-  | FactoredSelectStmt
-  | FilterClause
-  | ForeignKeyClause
-  | FrameSpec
-  | IndexedColumn
-  | InsertStmt
-  | JoinClause
-  | JoinConstraint
-  | LiteralValue
-  | NumericLiteral
-  | OrderingTerm
-  | OverClause
-  | PragmaStmt
-  | PragmaValue
-  | QualifiedTableName
-  | RaiseFunction
-  | RecursiveCte
-  | ReindexStmt
-  | ReleaseStmt
-  | ResultColumn
-  | RollbackStmt
-  | SavepointStmt
-  | SelectStmt
-  | SimpleFunctionInvocation
-  | SimpleSelectStmt
-  | SqlStmt
-  | SqlStmtList
-  | TableConstraint
-  | TableOrSubquery
-  | TypeName
-  | UpdateStmt
-  | UpsertClause
-  | VacuumStmt
-  | WindowDefn
-  | WindowFunctionInvocation
-  | WithClause;
-
-export type SelectCore = _SelectClause | _ValuesClause;
-
-/*
- * SQLite nodes
- * -------------------------------------------------------------------------------------------------
- */
+  * SQLite nodes
+  * ---------------------------------------------------------------------------------------------
+  */
 
 export type AggregateFunctionInvocation = {
   type: 'AggregateFunctionInvocation';

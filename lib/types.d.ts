@@ -1,781 +1,653 @@
-import {
-  _AddClause,
-  _AggregateArgs,
-  _AsClause,
-  _BetweenExpression,
-  _BinaryExpression,
-  _BinaryKeywordExpression,
-  _BindParameter,
-  _BlobLiteral,
-  _CallExpression,
-  _CaseExpression,
-  _CaseClause,
-  _CastExpression,
-  _CheckClause,
-  _CheckConstraint,
-  _CollateClause,
-  _CollateExpression,
-  _ColumnAliasClause,
-  _ColumnSelectorClause,
-  _CteSelectClause,
-  _DefaultClause,
-  _DeferrableClause,
-  _ExistsExpression,
-  _ForeignKeyConstraint,
-  _FrameSpecBetweenClause,
-  _FrameSpecExprClause,
-  _GroupByClause,
-  _Identifier,
-  _InExpression,
-  _InsertSelectClause,
-  _InsertValuesClause,
-  _IsExpression,
-  _JoinCompound,
-  _JoinOnClause,
-  _JoinUsingClause,
-  _LimitClause,
-  _LimiterClause,
-  _LimitTailClause,
-  _MatchClause,
-  _NotNullClause,
-  _NullComparisonExpression,
-  _OnClause,
-  _PragmaGetter,
-  _PragmaSetter,
-  _PrimaryKeyClause,
-  _PrimaryKeyConstraint,
-  _ReindexNameClause,
-  _RenameClause,
-  _SelectClause,
-  _SelectCompound,
-  _SelectFromClause,
-  _SelectorClause,
-  _SequenceExpression,
-  _SetClause,
-  _StringLiteral,
-  _TableCallClause,
-  _TableDef,
-  _TableQueryClause,
-  _TableSelectClause,
-  _TableSelectorClause,
-  _UniqueClause,
-  _UniqueConstraint,
-  _UpdateClause,
-  _UpdateSetClause,
-  _ValueClause,
-  _ValuesClause,
-  _WindowAsClause,
-  AggregateFunctionInvocation,
-  AlterTableStmt,
-  AnalyzeStmt,
-  AttachStmt,
-  BeginStmt,
-  ColumnConstraint,
-  ColumnDef,
-  ColumnNameList,
-  CommitStmt,
-  CommonTableExpression,
-  CompoundSelectStmt,
-  ConflictClause,
-  CreateIndexStmt,
-  CreateTableStmt,
-  CreateTriggerStmt,
-  CreateViewStmt,
-  CreateVirtualTableStmt,
-  CteTableName,
-  DeleteStmt,
-  DetachStmt,
-  DropIndexStmt,
-  DropTableStmt,
-  DropTriggerStmt,
-  DropViewStmt,
-  Expr,
-  FactoredSelectStmt,
-  FilterClause,
-  ForeignKeyClause,
-  FrameSpec,
-  IndexedColumn,
-  InsertStmt,
-  JoinClause,
-  JoinConstraint,
-  LiteralValue,
-  NumericLiteral,
-  OrderingTerm,
-  OverClause,
-  PragmaStmt,
-  PragmaValue,
-  QualifiedTableName,
-  RaiseFunction,
-  RecursiveCte,
-  ReindexStmt,
-  ReleaseStmt,
-  ResultColumn,
-  RollbackStmt,
-  SavepointStmt,
-  SelectStmt,
-  SimpleFunctionInvocation,
-  SimpleSelectStmt,
-  SqlStmt,
-  SqlStmtList,
-  TableConstraint,
-  TableOrSubquery,
-  TypeName,
-  UpdateStmt,
-  UpsertClause,
-  VacuumStmt,
-  WindowDefn,
-  WindowFunctionInvocation,
-  WithClause
-} from './ast';
+import * as AST from './ast';
 
 declare function _AddClause(
-  columnDef: ColumnDef
-): _AddClause;
+  columnDef: AST.ColumnDef
+): AST._AddClause;
 
 declare function _AggregateArgs(
   distinct: boolean,
-  expressions: [Expr, ...Expr[]]
-): _AggregateArgs;
+  expressions: [AST.Expr, ...AST.Expr[]]
+): AST._AggregateArgs;
 
 declare function _AsClause(
   generatedAlways: boolean,
-  as: Expr,
+  as: AST.Expr,
   mode: null | 'STORED' | 'VIRTUAL'
-): _AsClause;
+): AST._AsClause;
 
 declare function _BetweenExpression(
   negated: boolean,
-  lower: Expr,
-  upper: Expr
-): _BetweenExpression;
+  lower: AST.Expr,
+  upper: AST.Expr
+): AST._BetweenExpression;
 
 declare function _BinaryExpression(
-  left: Expr,
-  operator: _BinaryOperator,
-  right: Expr
-): _BinaryExpression;
+  left: AST.Expr,
+  operator: AST._BinaryOperator,
+  right: AST.Expr
+): AST._BinaryExpression;
 
 declare function _BinaryKeywordExpression(
   negated: boolean,
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH',
-  expr: Expr,
-  escape: null | Expr
-): _BinaryKeywordExpression;
+  expr: AST.Expr,
+  escape: null | AST.Expr
+): AST._BinaryKeywordExpression;
 
 declare function _BindParameter(
   bindParameter: string
-): _BindParameter;
+): AST._BindParameter;
 
 declare function _BlobLiteral(
   value: string[]
-): _BlobLiteral;
+): AST._BlobLiteral;
 
 declare function _CallExpression(
   functionName: string,
-  args: Expr[] | '*',
-  filter: null | FilterClause,
-  over: null | OverClause
-): _CallExpression;
+  args: AST.Expr[] | '*',
+  filter: null | AST.FilterClause,
+  over: null | AST.OverClause
+): AST._CallExpression;
 
 declare function _CaseExpression(
-  discriminant: Expr | null,
-  cases: [_CaseClause, ..._CaseClause[]],
-  alternate: Expr | null
-): _CaseExpression;
+  discriminant: AST.Expr | null,
+  cases: [AST._CaseClause, ...AST._CaseClause[]],
+  alternate: AST.Expr | null
+): AST._CaseExpression;
 
 declare function _CaseClause(
-  when: Expr,
-  then: Expr
-): _CaseClause;
+  when: AST.Expr,
+  then: AST.Expr
+): AST._CaseClause;
 
 declare function _CastExpression(
-  cast: Expr,
-  as: TypeName
-): _CastExpression;
+  cast: AST.Expr,
+  as: AST.TypeName
+): AST._CastExpression;
 
 declare function _CheckClause(
-  expr: Expr
-): _CheckClause;
+  expr: AST.Expr
+): AST._CheckClause;
 
 declare function _CheckConstraint(
-  check: Expr
-): _CheckConstraint;
+  check: AST.Expr
+): AST._CheckConstraint;
 
 declare function _CollateClause(
   collationName: string
-): _CollateClause;
+): AST._CollateClause;
 
 declare function _CollateExpression(
-  expr: Expr,
+  expr: AST.Expr,
   collationName: string
-): _CollateExpression;
+): AST._CollateExpression;
 
 declare function _ColumnAliasClause(
-  expr: Expr,
+  expr: AST.Expr,
   as: string | null
-): _ColumnAliasClause;
+): AST._ColumnAliasClause;
 
 declare function _ColumnSelectorClause(
   indexedColumns: [string, ...string[]],
-  where: null | Expr
-): _ColumnSelectorClause;
+  where: null | AST.Expr
+): AST._ColumnSelectorClause;
 
 declare function _CteSelectClause(
-  cteTableName: CteTableName,
-  as: SelectStmt
-): _CteSelectClause;
+  cteTableName: AST.CteTableName,
+  as: AST.SelectStmt
+): AST._CteSelectClause;
 
 declare function _DefaultClause(
-  expr: Expr | LiteralValue | number
-): _DefaultClause;
+  expr: AST.Expr | AST.LiteralValue | number
+): AST._DefaultClause;
 
 declare function _DeferrableClause(
   negated: boolean,
   initially: 'DEFERRED' | 'IMMEDIATE' | null
-): _DeferrableClause;
+): AST._DeferrableClause;
 
 declare function _ExistsExpression(
   negated: boolean,
-  select: SelectStmt
-): _ExistsExpression;
+  select: AST.SelectStmt
+): AST._ExistsExpression;
 
 declare function _ForeignKeyConstraint(
   columnNames: [string, ...string[]],
-  foreignKey: ForeignKeyClause
-): _ForeignKeyConstraint;
+  foreignKey: AST.ForeignKeyClause
+): AST._ForeignKeyConstraint;
 
 declare function _FrameSpecBetweenClause(
-  between: 'UNBOUNDED PRECEDING' | _FrameSpecExprClause | 'CURRENT ROW',
-  and: _FrameSpecExprClause | 'CURRENT ROW' | 'UNBOUNDED FOLLOWING'
-): _FrameSpecBetweenClause;
+  between: 'UNBOUNDED PRECEDING' | AST._FrameSpecExprClause | 'CURRENT ROW',
+  and: AST._FrameSpecExprClause | 'CURRENT ROW' | 'UNBOUNDED FOLLOWING'
+): AST._FrameSpecBetweenClause;
 
 declare function _FrameSpecExprClause(
-  expr: Expr,
+  expr: AST.Expr,
   position: 'PRECEDING' | 'FOLLOWING'
-): _FrameSpecExprClause;
+): AST._FrameSpecExprClause;
 
 declare function _GroupByClause(
-  expressions: [Expr, ...Expr[]],
-  having: Expr | null
-): _GroupByClause;
+  expressions: [AST.Expr, ...AST.Expr[]],
+  having: AST.Expr | null
+): AST._GroupByClause;
 
 declare function _Identifier(
   name: N
-): _Identifier;
+): AST._Identifier;
 
 declare function _InExpression(
   negated: boolean,
-  selector: _SelectorClause | _TableSelectorClause
-): _InExpression;
+  selector: AST._SelectorClause | AST._TableSelectorClause
+): AST._InExpression;
 
 declare function _InsertSelectClause(
-  select: SelectStmt,
-  upsert: null | UpsertClause
-): _InsertSelectClause;
+  select: AST.SelectStmt,
+  upsert: null | AST.UpsertClause
+): AST._InsertSelectClause;
 
 declare function _InsertValuesClause(
-  values: _ValuesClause,
-  upsert: null | UpsertClause
-): _InsertValuesClause;
+  values: AST._ValuesClause,
+  upsert: null | AST.UpsertClause
+): AST._InsertValuesClause;
 
 declare function _IsExpression(
-  left: Expr,
+  left: AST.Expr,
   negated: boolean,
-  right: Expr
-): _IsExpression;
+  right: AST.Expr
+): AST._IsExpression;
 
 declare function _JoinCompound(
-  operator: JoinOperator,
-  query: TableOrSubquery,
-  constraint: JoinConstraint
-): _JoinCompound;
+  operator: AST.JoinOperator,
+  query: AST.TableOrSubquery,
+  constraint: AST.JoinConstraint
+): AST._JoinCompound;
 
 declare function _JoinOnClause(
-  on: Expr
-): _JoinOnClause;
+  on: AST.Expr
+): AST._JoinOnClause;
 
 declare function _JoinUsingClause(
   columnNames: [string, ...string[]]
-): _JoinUsingClause;
+): AST._JoinUsingClause;
 
 declare function _LimitClause(
-  left: Expr,
-  right: _LimitTailClause | null
-): _LimitClause;
+  left: AST.Expr,
+  right: AST._LimitTailClause | null
+): AST._LimitClause;
 
 declare function _LimiterClause(
-  orderBy: OrderingTerm[],
-  limit: _LimitClause | null
-): _LimiterClause;
+  orderBy: AST.OrderingTerm[],
+  limit: AST._LimitClause | null
+): AST._LimiterClause;
 
 declare function _LimitTailClause(
   offset: boolean,
-  expr: Expr
-): _LimitTailClause;
+  expr: AST.Expr
+): AST._LimitTailClause;
 
 declare function _MatchClause(
   name: string
-): _MatchClause;
+): AST._MatchClause;
 
 declare function _NotNullClause(
-  onConflict: ConflictClause
-): _NotNullClause;
+  onConflict: AST.ConflictClause
+): AST._NotNullClause;
 
 declare function _NullComparisonExpression(
-  expr: Expr,
+  expr: AST.Expr,
   negated: boolean
-): _NullComparisonExpression;
+): AST._NullComparisonExpression;
 
 declare function _OnClause(
   on: 'DELETE' | 'UPDATE',
   action: 'SET NULL' | 'SET DEFAULT' | 'CASCADE' | 'RESTRICT' | 'NO ACTION'
-): _OnClause;
+): AST._OnClause;
 
 declare function _PragmaGetter(
-  value: PragmaValue
-): _PragmaGetter;
+  value: AST.PragmaValue
+): AST._PragmaGetter;
 
 declare function _PragmaSetter(
-  value: PragmaValue
-): _PragmaSetter;
+  value: AST.PragmaValue
+): AST._PragmaSetter;
 
 declare function _PrimaryKeyClause(
   orderBy: null | 'ASC' | 'DESC',
-  onConflict: ConflictClause,
+  onConflict: AST.ConflictClause,
   autoincrement: boolean
-): _PrimaryKeyClause;
+): AST._PrimaryKeyClause;
 
 declare function _PrimaryKeyConstraint(
-  indexedColumns: [IndexedColumn, ...IndexedColumn[]],
-  onConflict: null | ConflictClause
-): _PrimaryKeyConstraint;
+  indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
+  onConflict: null | AST.ConflictClause
+): AST._PrimaryKeyConstraint;
 
 declare function _ReindexNameClause(
   name: [string, string] | string
-): _ReindexNameClause;
+): AST._ReindexNameClause;
 
 declare function _RenameClause(
   from: null | string,
   to: string
-): _RenameClause;
+): AST._RenameClause;
 
 declare function _SelectClause(
   modifier: null | 'DISTINCT' | 'ALL',
-  resultColumns: [ResultColumn, ...ResultColumn[]],
-  from: _SelectFromClause,
-  where: null | Expr,
-  groupBy: null | _GroupByClause,
-  window: _WindowAsClause[]
-): _SelectClause;
+  resultColumns: [AST.ResultColumn, ...AST.ResultColumn[]],
+  from: AST._SelectFromClause,
+  where: null | AST.Expr,
+  groupBy: null | AST._GroupByClause,
+  window: AST._WindowAsClause[]
+): AST._SelectClause;
 
 declare function _SelectCompound(
-  operator: CompoundOperator,
-  selector: SelectCore
-): _SelectCompound;
+  operator: AST.CompoundOperator,
+  selector: AST.SelectCore
+): AST._SelectCompound;
 
 declare function _SelectFromClause(
-  query: TableOrSubquery | null
-): _SelectFromClause;
+  query: AST.TableOrSubquery | null
+): AST._SelectFromClause;
 
 declare function _SelectorClause(
-  selector: SelectStmt | Expr[]
-): _SelectorClause;
+  selector: AST.SelectStmt | AST.Expr[]
+): AST._SelectorClause;
 
 declare function _SequenceExpression(
-  expressions: [Expr, ...Expr[]]
-): _SequenceExpression;
+  expressions: [AST.Expr, ...AST.Expr[]]
+): AST._SequenceExpression;
 
 declare function _SetClause(
-  columns: string | ColumnNameList,
-  expr: Expr
-): _SetClause;
+  columns: string | AST.ColumnNameList,
+  expr: AST.Expr
+): AST._SetClause;
 
 declare function _StringLiteral(
   value: string
-): _StringLiteral;
+): AST._StringLiteral;
 
 declare function _TableCallClause(
   name: [string, string] | string,
-  args: [Expr, ...Expr[]],
+  args: [AST.Expr, ...AST.Expr[]],
   tableAlias: string
-): _TableCallClause;
+): AST._TableCallClause;
 
 declare function _TableDef(
-  columnDefs: [ColumnDef, ...ColumnDef[]],
-  tableConstraints: TableConstraint[],
+  columnDefs: [AST.ColumnDef, ...AST.ColumnDef[]],
+  tableConstraints: AST.TableConstraint[],
   withoutRowId: boolean
-): _TableDef;
+): AST._TableDef;
 
 declare function _TableQueryClause(
-  query: [TableOrSubquery, ...TableOrSubquery[]] | JoinClause
-): _TableQueryClause;
+  query: [AST.TableOrSubquery, ...AST.TableOrSubquery[]] | AST.JoinClause
+): AST._TableQueryClause;
 
 declare function _TableSelectClause(
-  select: SelectStmt,
+  select: AST.SelectStmt,
   tableAlias: string
-): _TableSelectClause;
+): AST._TableSelectClause;
 
 declare function _TableSelectorClause(
   name: [string, string] | string,
-  args: Expr[]
-): _TableSelectorClause;
+  args: AST.Expr[]
+): AST._TableSelectorClause;
 
 declare function _UniqueClause(
-  conflict: ConflictClause
-): _UniqueClause;
+  conflict: AST.ConflictClause
+): AST._UniqueClause;
 
 declare function _UniqueConstraint(
-  indexedColumns: [IndexedColumn, ...IndexedColumn[]],
-  conflict: null | ConflictClause
-): _UniqueConstraint;
+  indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
+  conflict: null | AST.ConflictClause
+): AST._UniqueConstraint;
 
 declare function _UpdateClause(
   columnNames: string[]
-): _UpdateClause;
+): AST._UpdateClause;
 
 declare function _UpdateSetClause(
-  set: [_SetClause, ..._SetClause[]],
-  where: null | Expr
-): _UpdateSetClause;
+  set: [AST._SetClause, ...AST._SetClause[]],
+  where: null | AST.Expr
+): AST._UpdateSetClause;
 
 declare function _ValueClause(
-  values: [Expr, ...Expr[]]
-): _ValueClause;
+  values: [AST.Expr, ...AST.Expr[]]
+): AST._ValueClause;
 
 declare function _ValuesClause(
-  rows: [_ValueClause, ..._ValueClause[]]
-): _ValuesClause;
+  rows: [AST._ValueClause, ...AST._ValueClause[]]
+): AST._ValuesClause;
 
 declare function _WindowAsClause(
   windowName: string,
-  windowDefn: WindowDefn
-): _WindowAsClause;
+  windowDefn: AST.WindowDefn
+): AST._WindowAsClause;
 
 declare function AggregateFunctionInvocation(
   aggregateFunc: string,
-  args: _AggregateArgs | '*' | null,
-  filter: null | FilterClause
-): AggregateFunctionInvocation;
+  args: AST._AggregateArgs | '*' | null,
+  filter: null | AST.FilterClause
+): AST.AggregateFunctionInvocation;
 
 declare function AlterTableStmt(
   name: [string, string] | string,
-  action: _RenameClause | _AddClause
-): AlterTableStmt;
+  action: AST._RenameClause | AST._AddClause
+): AST.AlterTableStmt;
 
 declare function AnalyzeStmt(
   name: null | [string, string] | string
-): AnalyzeStmt;
+): AST.AnalyzeStmt;
 
 declare function AttachStmt(
-  expr: Expr,
+  expr: AST.Expr,
   schemaName: string
-): AttachStmt;
+): AST.AttachStmt;
 
 declare function BeginStmt(
   mode: null | 'DEFERRED' | 'IMMEDIATE' | 'EXCLUSIVE'
-): BeginStmt;
+): AST.BeginStmt;
 
 declare function ColumnConstraint(
   name: string | null,
-  constraint: _ColumnConstraintClause
-): ColumnConstraint;
+  constraint: AST._ColumnConstraintClause
+): AST.ColumnConstraint;
 
 declare function ColumnDef(
   columnName: string,
   typeName: string | null,
-  columnConstraints: ColumnConstraint[]
-): ColumnDef;
+  columnConstraints: AST.ColumnConstraint[]
+): AST.ColumnDef;
 
 declare function ColumnNameList(
   columnNames: [string, ...string[]]
-): ColumnNameList;
+): AST.ColumnNameList;
 
-declare function CommitStmt(): CommitStmt;
+declare function CommitStmt(): AST.CommitStmt;
 
 declare function CommonTableExpression(
   tableName: string,
   columnNames: string[],
-  as: SelectStmt
-): CommonTableExpression;
+  as: AST.SelectStmt
+): AST.CommonTableExpression;
 
 declare function CompoundSelectStmt(
-  withClause: WithClause | null,
-  select: [SelectCore, ..._SelectCompound[]],
-  limiter: _LimiterClause | null
-): CompoundSelectStmt;
+  withClause: AST.WithClause | null,
+  select: [AST.SelectCore, ...AST._SelectCompound[]],
+  limiter: AST._LimiterClause | null
+): AST.CompoundSelectStmt;
 
 declare function ConflictClause(
   onConflict: null | 'ROLLBACK' | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE'
-): ConflictClause;
+): AST.ConflictClause;
 
 declare function CreateIndexStmt(
   unique: boolean,
   ifNotExists: boolean,
   name: [string, string] | string,
   tableName: string,
-  selector: _ColumnSelectorClause
-): CreateIndexStmt;
+  selector: AST._ColumnSelectorClause
+): AST.CreateIndexStmt;
 
 declare function CreateTableStmt(
   temporary: boolean,
   ifNotExists: boolean,
   name: [string, string] | string,
-  target: SelectStmt | _TableDef
-): CreateTableStmt;
+  target: AST.SelectStmt | AST._TableDef
+): AST.CreateTableStmt;
 
 declare function CreateTriggerStmt(
   temporary: boolean,
   ifNotExists: boolean,
   name: [string, string] | string,
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null,
-  event: 'DELETE' | 'INSERT' | _UpdateClause,
+  event: 'DELETE' | 'INSERT' | AST._UpdateClause,
   tableName: string,
   forEachRow: boolean,
-  when: Expr | null,
-  begin: [_TriggerStmt, ..._TriggerStmt[]]
-): CreateTriggerStmt;
+  when: AST.Expr | null,
+  begin: [AST._TriggerStmt, ...AST._TriggerStmt[]]
+): AST.CreateTriggerStmt;
 
 declare function CreateViewStmt(
   temporary: boolean,
   ifNotExists: boolean,
   name: [string, string] | string,
   columns: string[],
-  select: SelectStmt
-): CreateViewStmt;
+  select: AST.SelectStmt
+): AST.CreateViewStmt;
 
 declare function CreateVirtualTableStmt(
   ifNotExists: boolean,
   name: [string, string] | string,
   moduleName: string,
   moduleArguments: string[]
-): CreateVirtualTableStmt;
+): AST.CreateVirtualTableStmt;
 
 declare function CteTableName(
   tableName: string,
   columnNames: string[]
-): CteTableName;
+): AST.CteTableName;
 
 declare function DeleteStmt(
-  withClause: WithClause | null,
-  qualifiedTableName: QualifiedTableName,
-  where: Expr | null,
-  limiter: _LimiterClause | null
-): DeleteStmt;
+  withClause: AST.WithClause | null,
+  qualifiedTableName: AST.QualifiedTableName,
+  where: AST.Expr | null,
+  limiter: AST._LimiterClause | null
+): AST.DeleteStmt;
 
 declare function DetachStmt(
   schemaName: string
-): DetachStmt;
+): AST.DetachStmt;
 
 declare function DropIndexStmt(
   ifExists: boolean,
   name: [string, string] | string
-): DropIndexStmt;
+): AST.DropIndexStmt;
 
 declare function DropTableStmt(
   ifExists: boolean,
   name: [string, string] | string
-): DropTableStmt;
+): AST.DropTableStmt;
 
 declare function DropTriggerStmt(
   ifExists: boolean,
   name: [string, string] | string
-): DropTriggerStmt;
+): AST.DropTriggerStmt;
 
 declare function DropViewStmt(
   ifExists: boolean,
   name: [string, string] | string
-): DropViewStmt;
+): AST.DropViewStmt;
 
 declare function Expr(
-  expr: _ExprClause
-): Expr;
+  expr: AST._ExprClause
+): AST.Expr;
 
 declare function FactoredSelectStmt(
-  withClause: WithClause | null,
-  selectors: [SelectCore, ..._SelectCompound[]],
-  limiter: _LimiterClause | null
-): FactoredSelectStmt;
+  withClause: AST.WithClause | null,
+  selectors: [AST.SelectCore, ...AST._SelectCompound[]],
+  limiter: AST._LimiterClause | null
+): AST.FactoredSelectStmt;
 
 declare function FilterClause(
-  where: Expr
-): FilterClause;
+  where: AST.Expr
+): AST.FilterClause;
 
 declare function ForeignKeyClause(
   foreignTable: string,
   columnNames: string[],
-  events: (_OnClause | _MatchClause)[],
-  deferrable: _DeferrableClause | null
-): ForeignKeyClause;
+  events: (AST._OnClause | AST._MatchClause)[],
+  deferrable: AST._DeferrableClause | null
+): AST.ForeignKeyClause;
 
 declare function FrameSpec(
   frame: 'RANGE' | 'ROWS' | 'GROUPS',
-  target: _FrameSpecBetweenClause | 'UNBOUNDED PRECEDING' | Expr | 'CURRENT ROW',
+  target: AST._FrameSpecBetweenClause | 'UNBOUNDED PRECEDING' | AST.Expr | 'CURRENT ROW',
   exclude: 'NOT OTHERS' | 'CURRENT ROW' | 'GROUP' | 'TIES' | null
-): FrameSpec;
+): AST.FrameSpec;
 
 declare function IndexedColumn(
-  target: string | Expr,
+  target: string | AST.Expr,
   collationName: string | null,
   orderBy: null | 'ASC' | 'DESC'
-): IndexedColumn;
+): AST.IndexedColumn;
 
 declare function InsertStmt(
-  withClause: WithClause,
-  operator: _InsertOperator,
+  withClause: AST.WithClause,
+  operator: AST._InsertOperator,
   name: [string, string] | string,
   alias: string | null,
   columns: string[],
-  source: _InsertValuesClause | _InsertSelectClause | 'DEFAULT VALUES'
-): InsertStmt;
+  source: AST._InsertValuesClause | AST._InsertSelectClause | 'DEFAULT VALUES'
+): AST.InsertStmt;
 
 declare function JoinClause(
-  joinees: [TableOrSubquery, ..._JoinCompound[]]
-): JoinClause;
+  joinees: [AST.TableOrSubquery, ...AST._JoinCompound[]]
+): AST.JoinClause;
 
 declare function JoinConstraint(
-  constraint: _JoinOnClause | _JoinUsingClause | null
-): JoinConstraint;
+  constraint: AST._JoinOnClause | AST._JoinUsingClause | null
+): AST.JoinConstraint;
 
 declare function LiteralValue(
-  value: _LiteralValue
-): LiteralValue;
+  value: AST._LiteralValue
+): AST.LiteralValue;
 
 declare function NumericLiteral(
   value: number
-): NumericLiteral;
+): AST.NumericLiteral;
 
 declare function OrderingTerm(
-  indexedColumn: IndexedColumn,
+  indexedColumn: AST.IndexedColumn,
   nulls: 'FIRST' | 'LAST' | null
-): OrderingTerm;
+): AST.OrderingTerm;
 
 declare function OverClause(
-  over: string | WindowDefn
-): OverClause;
+  over: string | AST.WindowDefn
+): AST.OverClause;
 
 declare function PragmaStmt(
   name: [string, string] | string,
-  right: null | _PragmaSetter | _PragmaGetter
-): PragmaStmt;
+  right: null | AST._PragmaSetter | AST._PragmaGetter
+): AST.PragmaStmt;
 
 declare function PragmaValue(
   value: number | string
-): PragmaValue;
+): AST.PragmaValue;
 
 declare function QualifiedTableName(
   name: [string, string] | string,
   alias: null | string,
   indexedBy: string | false | null
-): QualifiedTableName;
+): AST.QualifiedTableName;
 
 declare function RaiseFunction(
   onError: ['ROLLBACK' | 'ABORT' | 'FAIL', string] | null
-): RaiseFunction;
+): AST.RaiseFunction;
 
 declare function RecursiveCte(
-  cteTableName: CteTableName,
+  cteTableName: AST.CteTableName,
   initialSelect: string,
   all: boolean,
   recursiveSelect: string
-): RecursiveCte;
+): AST.RecursiveCte;
 
 declare function ReindexStmt(
-  target: null | string | _ReindexNameClause
-): ReindexStmt;
+  target: null | string | AST._ReindexNameClause
+): AST.ReindexStmt;
 
 declare function ReleaseStmt(
   savepointName: string
-): ReleaseStmt;
+): AST.ReleaseStmt;
 
 declare function ResultColumn(
-  source: _ColumnAliasClause | string
-): ResultColumn;
+  source: AST._ColumnAliasClause | string
+): AST.ResultColumn;
 
 declare function RollbackStmt(
   savepointName: string
-): RollbackStmt;
+): AST.RollbackStmt;
 
 declare function SavepointStmt(
   savepointName: string
-): SavepointStmt;
+): AST.SavepointStmt;
 
 declare function SelectStmt(
-  withClause: WithClause | null,
-  select: [SelectCore, ..._SelectCompound[]],
-  limiter: _LimiterClause | null
-): SelectStmt;
+  withClause: AST.WithClause | null,
+  select: [AST.SelectCore, ...AST._SelectCompound[]],
+  limiter: AST._LimiterClause | null
+): AST.SelectStmt;
 
 declare function SimpleFunctionInvocation(
   simpleFunc: string,
-  args: Expr[] | '*'
-): SimpleFunctionInvocation;
+  args: AST.Expr[] | '*'
+): AST.SimpleFunctionInvocation;
 
 declare function SimpleSelectStmt(
-  withClause: WithClause | null,
-  select: SelectCore,
-  limiter: _LimiterClause | null
-): SimpleSelectStmt;
+  withClause: AST.WithClause | null,
+  select: AST.SelectCore,
+  limiter: AST._LimiterClause | null
+): AST.SimpleSelectStmt;
 
 declare function SqlStmt(
   explain: boolean,
-  statement: _SqlStmt
-): SqlStmt;
+  statement: AST._SqlStmt
+): AST.SqlStmt;
 
 declare function SqlStmtList(
-  statements: SqlStmt[]
-): SqlStmtList;
+  statements: AST.SqlStmt[]
+): AST.SqlStmtList;
 
 declare function TableConstraint(
   name: null | string,
-  constraint: _TableConstraint
-): TableConstraint;
+  constraint: AST._TableConstraint
+): AST.TableConstraint;
 
 declare function TableOrSubquery(
-  query: _TableOrSubquery
-): TableOrSubquery;
+  query: AST._TableOrSubquery
+): AST.TableOrSubquery;
 
 declare function TypeName(
   names: [string, ...string[]],
   args: [number?, number?]
-): TypeName;
+): AST.TypeName;
 
 declare function UpdateStmt(
-  withClause: WithClause,
+  withClause: AST.WithClause,
   updateOr: null | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK',
-  name: QualifiedTableName,
-  set: [_SetClause, ..._SetClause[]],
-  from: _TableQueryClause,
-  where: Expr | null,
-  limiter: _LimiterClause | null
-): UpdateStmt;
+  name: AST.QualifiedTableName,
+  set: [AST._SetClause, ...AST._SetClause[]],
+  from: AST._TableQueryClause,
+  where: AST.Expr | null,
+  limiter: AST._LimiterClause | null
+): AST.UpdateStmt;
 
 declare function UpsertClause(
-  onConflict: null | _ColumnSelectorClause,
-  action: null | _UpdateSetClause
-): UpsertClause;
+  onConflict: null | AST._ColumnSelectorClause,
+  action: null | AST._UpdateSetClause
+): AST.UpsertClause;
 
 declare function VacuumStmt(
   schemaName: null | string,
   filename: null | string
-): VacuumStmt;
+): AST.VacuumStmt;
 
 declare function WindowDefn(
   baseWindowName: null | string,
-  partitionBy: Expr[],
-  orderBy: OrderingTerm[],
-  frameSpec: FrameSpec | null
-): WindowDefn;
+  partitionBy: AST.Expr[],
+  orderBy: AST.OrderingTerm[],
+  frameSpec: AST.FrameSpec | null
+): AST.WindowDefn;
 
 declare function WindowFunctionInvocation(
   windowFunc: string,
-  expr: Expr[] | '*',
-  filter: null | FilterClause,
-  over: WindowDefn | string
-): WindowFunctionInvocation;
+  expr: AST.Expr[] | '*',
+  filter: null | AST.FilterClause,
+  over: AST.WindowDefn | string
+): AST.WindowFunctionInvocation;
 
 declare function WithClause(
   recursive: boolean,
-  expressions: [_CteSelectClause, ..._CteSelectClause[]]
-): WithClause;
+  expressions: [AST._CteSelectClause, ...AST._CteSelectClause[]]
+): AST.WithClause;
 
-export * as AST from './ast';
+export { AST };

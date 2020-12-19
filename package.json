@@ -1,6 +1,6 @@
 {
   "name": "@robinblomberg/sqlite-ast",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
