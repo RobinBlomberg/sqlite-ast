@@ -2,6 +2,181 @@
  * @see https://sqlite.org/syntaxdiagrams.html
  */
 
+/*
+ * Internal aliases
+ * -------------------------------------------------------------------------------------------------
+ */
+
+export type _BinaryOperator = string;
+
+export type _ColumnConstraintClause =
+  | _PrimaryKeyClause
+  | _NotNullClause
+  | _UniqueClause
+  | _CheckClause
+  | _DefaultClause
+  | _CollateClause
+  | ForeignKeyClause
+  | _AsClause;
+
+export type _ExprClause = 
+  | LiteralValue
+  | _BindParameter
+  | ([string, string?, string?])
+  | _UnaryOperator
+  | _BinaryExpression
+  | _CallExpression
+  | _SequenceExpression
+  | _CastExpression
+  | _CollateExpression
+  | _BinaryKeywordExpression
+  | _NullComparisonExpression
+  | _IsExpression
+  | _BetweenExpression
+  | _InExpression
+  | _ExistsExpression
+  | _CaseExpression
+  | RaiseFunction;
+
+export type _InsertOperator =
+  | 'REPLACE'
+  | 'INSERT'
+  | 'INSERT OR ABORT'
+  | 'INSERT OR FAIL'
+  | 'INSERT OR IGNORE'
+  | 'INSERT OR REPLACE'
+  | 'INSERT OR ROLLBACK';
+
+export type _LiteralValue =
+  | NumericLiteral
+  | _StringLiteral
+  | _BlobLiteral
+  | _Identifier<
+    | 'NULL'
+    | 'TRUE'
+    | 'FALSE'
+    | 'CURRENT_TIME'
+    | 'CURRENT_DATE'
+    | 'CURRENT_TIMESTAMP'
+  >;
+
+export type _Node =
+  | Node
+  | _AddClause
+  | _AggregateArgs
+  | _AsClause
+  | _BetweenExpression
+  | _BinaryExpression
+  | _BinaryKeywordExpression
+  | _BindParameter
+  | _BlobLiteral
+  | _CallExpression
+  | _CaseExpression
+  | _CaseClause
+  | _CastExpression
+  | _CheckClause
+  | _CheckConstraint
+  | _CollateClause
+  | _CollateExpression
+  | _ColumnAliasClause
+  | _ColumnSelectorClause
+  | _CteSelectClause
+  | _DefaultClause
+  | _DeferrableClause
+  | _ExistsExpression
+  | _ForeignKeyConstraint
+  | _FrameSpecBetweenClause
+  | _FrameSpecExprClause
+  | _GroupByClause
+  | _Identifier
+  | _InExpression
+  | _InsertSelectClause
+  | _InsertValuesClause
+  | _IsExpression
+  | _JoinCompound
+  | _JoinOnClause
+  | _JoinUsingClause
+  | _LimitClause
+  | _LimiterClause
+  | _LimitTailClause
+  | _MatchClause
+  | _NotNullClause
+  | _NullComparisonExpression
+  | _OnClause
+  | _PragmaGetter
+  | _PragmaSetter
+  | _PrimaryKeyClause
+  | _PrimaryKeyConstraint
+  | _ReindexNameClause
+  | _RenameClause
+  | _SelectClause
+  | _SelectCompound
+  | _SelectFromClause
+  | _SelectorClause
+  | _SequenceExpression
+  | _SetClause
+  | _StringLiteral
+  | _TableCallClause
+  | _TableDef
+  | _TableQueryClause
+  | _TableSelectClause
+  | _TableSelectorClause
+  | _UniqueClause
+  | _UniqueConstraint
+  | _UpdateClause
+  | _UpdateSetClause
+  | _ValueClause
+  | _ValuesClause
+  | _WindowAsClause;
+
+export type _SqlStmt =
+  | AlterTableStmt
+  | AnalyzeStmt
+  | AttachStmt
+  | BeginStmt
+  | CommitStmt
+  | CreateIndexStmt
+  | CreateTableStmt
+  | CreateTriggerStmt
+  | CreateViewStmt
+  | CreateVirtualTableStmt
+  | DeleteStmt
+  | DetachStmt
+  | DropIndexStmt
+  | DropTableStmt
+  | DropTriggerStmt
+  | DropViewStmt
+  | InsertStmt
+  | PragmaStmt
+  | ReindexStmt
+  | ReleaseStmt
+  | RollbackStmt
+  | SavepointStmt
+  | SelectStmt
+  | UpdateStmt
+  | VacuumStmt;
+
+export type _TableConstraint =
+  | _PrimaryKeyConstraint
+  | _UniqueConstraint
+  | _CheckConstraint
+  | _ForeignKeyConstraint;
+
+export type _TableOrSubquery =
+  | QualifiedTableName
+  | _TableCallClause
+  | _TableSelectClause
+  | _TableQueryClause;
+
+export type _TriggerStmt = UpdateStmt | InsertStmt | DeleteStmt | SelectStmt;
+
+export type _UnaryOperator = string;
+
+/*
+ * Internal nodes
+ * -------------------------------------------------------------------------------------------------
+ */
+
 export type _AddClause = {
   type: '_AddColumnClause';
   columnDef: ColumnDef;
@@ -41,8 +216,6 @@ export type _BinaryKeywordExpression = {
   expr: Expr;
   escape: null | Expr;
 };
-
-export type _BinaryOperator = string;
 
 export type _BindParameter = {
   type: '_BindParameter';
@@ -108,16 +281,6 @@ export type _ColumnAliasClause = {
   as: string | null;
 };
 
-export type _ColumnConstraintClause =
-  | _PrimaryKeyClause
-  | _NotNullClause
-  | _UniqueClause
-  | _CheckClause
-  | _DefaultClause
-  | _CollateClause
-  | ForeignKeyClause
-  | _AsClause;
-
 export type _ColumnSelectorClause = {
   type: '_ColumnSelectorClause';
   indexedColumns: [string, ...string[]];
@@ -146,25 +309,6 @@ export type _ExistsExpression = {
   negated: boolean;
   select: SelectStmt;
 };
-
-export type _ExprClause = 
-  | LiteralValue
-  | _BindParameter
-  | ([string, string?, string?])
-  | _UnaryOperator
-  | _BinaryExpression
-  | _CallExpression
-  | _SequenceExpression
-  | _CastExpression
-  | _CollateExpression
-  | _BinaryKeywordExpression
-  | _NullComparisonExpression
-  | _IsExpression
-  | _BetweenExpression
-  | _InExpression
-  | _ExistsExpression
-  | _CaseExpression
-  | RaiseFunction;
 
 export type _ForeignKeyConstraint = {
   type: '_ForeignKeyConstraint';
@@ -200,15 +344,6 @@ export type _InExpression = {
   negated: boolean;
   selector: _SelectorClause | _TableSelectorClause;
 };
-
-export type _InsertOperator =
-  | 'REPLACE'
-  | 'INSERT'
-  | 'INSERT OR ABORT'
-  | 'INSERT OR FAIL'
-  | 'INSERT OR IGNORE'
-  | 'INSERT OR REPLACE'
-  | 'INSERT OR ROLLBACK';
 
 export type _InsertSelectClause = {
   type: '_InsertSelectClause';
@@ -263,19 +398,6 @@ export type _LimitTailClause = {
   offset: boolean;
   expr: Expr;
 };
-
-export type _LiteralValue =
-  | NumericLiteral
-  | _StringLiteral
-  | _BlobLiteral
-  | _Identifier<
-    | 'NULL'
-    | 'TRUE'
-    | 'FALSE'
-    | 'CURRENT_TIME'
-    | 'CURRENT_DATE'
-    | 'CURRENT_TIMESTAMP'
-  >;
 
 export type _MatchClause = {
   type: '_MatchClause';
@@ -370,33 +492,6 @@ export type _SetClause = {
   expr: Expr;
 };
 
-export type _SqlStmt =
-  | AlterTableStmt
-  | AnalyzeStmt
-  | AttachStmt
-  | BeginStmt
-  | CommitStmt
-  | CreateIndexStmt
-  | CreateTableStmt
-  | CreateTriggerStmt
-  | CreateViewStmt
-  | CreateVirtualTableStmt
-  | DeleteStmt
-  | DetachStmt
-  | DropIndexStmt
-  | DropTableStmt
-  | DropTriggerStmt
-  | DropViewStmt
-  | InsertStmt
-  | PragmaStmt
-  | ReindexStmt
-  | ReleaseStmt
-  | RollbackStmt
-  | SavepointStmt
-  | SelectStmt
-  | UpdateStmt
-  | VacuumStmt;
-
 export type _StringLiteral = {
   type: '_StringLiteral';
   value: string;
@@ -409,24 +504,12 @@ export type _TableCallClause = {
   tableAlias: string;
 };
 
-export type _TableConstraint =
-  | _PrimaryKeyConstraint
-  | _UniqueConstraint
-  | _CheckConstraint
-  | _ForeignKeyConstraint;
-
 export type _TableDef = {
   type: '_TableDef';
   columnDefs: [ColumnDef, ...ColumnDef[]];
   tableConstraints: TableConstraint[];
   withoutRowId: boolean;
 };
-
-export type _TableOrSubquery =
-  | QualifiedTableName
-  | _TableCallClause
-  | _TableSelectClause
-  | _TableQueryClause;
 
 export type _TableQueryClause = {
   type: '_TableQueryClause';
@@ -444,10 +527,6 @@ export type _TableSelectorClause = {
   name: [string, string] | string;
   args: Expr[];
 };
-
-export type _TriggerStmt = UpdateStmt | InsertStmt | DeleteStmt | SelectStmt;
-
-export type _UnaryOperator = string;
 
 export type _UniqueClause = {
   type: '_UniqueClause';
@@ -486,6 +565,96 @@ export type _WindowAsClause = {
   windowName: string;
   windowDefn: WindowDefn;
 };
+
+/*
+ * SQLite aliases
+ * -------------------------------------------------------------------------------------------------
+ */
+
+export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
+
+export type JoinOperator =
+  | ','
+  | 'JOIN'
+  | 'LEFT OUTER JOIN'
+  | 'LEFT JOIN'
+  | 'INNER JOIN'
+  | 'CROSS JOIN'
+  | 'NATURAL JOIN'
+  | 'NATURAL LEFT OUTER JOIN'
+  | 'NATURAL LEFT JOIN'
+  | 'NATURAL INNER JOIN'
+  | 'NATURAL CROSS JOIN';
+
+export type Node =
+  | AggregateFunctionInvocation
+  | AlterTableStmt
+  | AnalyzeStmt
+  | AttachStmt
+  | BeginStmt
+  | ColumnConstraint
+  | ColumnDef
+  | ColumnNameList
+  | CommitStmt
+  | CommonTableExpression
+  | CompoundSelectStmt
+  | ConflictClause
+  | CreateIndexStmt
+  | CreateTableStmt
+  | CreateTriggerStmt
+  | CreateViewStmt
+  | CreateVirtualTableStmt
+  | CteTableName
+  | DeleteStmt
+  | DetachStmt
+  | DropIndexStmt
+  | DropTableStmt
+  | DropTriggerStmt
+  | DropViewStmt
+  | Expr
+  | FactoredSelectStmt
+  | FilterClause
+  | ForeignKeyClause
+  | FrameSpec
+  | IndexedColumn
+  | InsertStmt
+  | JoinClause
+  | JoinConstraint
+  | LiteralValue
+  | NumericLiteral
+  | OrderingTerm
+  | OverClause
+  | PragmaStmt
+  | PragmaValue
+  | QualifiedTableName
+  | RaiseFunction
+  | RecursiveCte
+  | ReindexStmt
+  | ReleaseStmt
+  | ResultColumn
+  | RollbackStmt
+  | SavepointStmt
+  | SelectStmt
+  | SimpleFunctionInvocation
+  | SimpleSelectStmt
+  | SqlStmt
+  | SqlStmtList
+  | TableConstraint
+  | TableOrSubquery
+  | TypeName
+  | UpdateStmt
+  | UpsertClause
+  | VacuumStmt
+  | WindowDefn
+  | WindowFunctionInvocation
+  | WithClause;
+
+export type SelectCore = _SelectClause | _ValuesClause;
+
+/*
+ * SQLite nodes
+ * -------------------------------------------------------------------------------------------------
+ */
 
 export type AggregateFunctionInvocation = {
   type: 'AggregateFunctionInvocation';
@@ -534,7 +703,7 @@ export type ColumnNameList = {
   columnNames: [string, ...string[]];
 };
 
-/** CommentSyntax (omitted syntax node) */
+/* CommentSyntax (omitted syntax node) */
 
 export type CommitStmt = {
   type: 'CommitStmt';
@@ -546,8 +715,6 @@ export type CommonTableExpression = {
   columnNames: string[];
   as: SelectStmt;
 };
-
-export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
 
 export type CompoundSelectStmt = {
   type: 'CompoundSelectStmt';
@@ -622,7 +789,7 @@ export type DeleteStmt = {
   limiter: _LimiterClause | null; // Merged from DeleteStmtLimited.
 };
 
-/** DeleteStmtLimited (merged into DeleteStmt) */
+/* DeleteStmtLimited (merged into DeleteStmt) */
 
 export type DetachStmt = {
   type: 'DetachStmt';
@@ -712,19 +879,6 @@ export type JoinConstraint = {
   constraint: _JoinOnClause | _JoinUsingClause | null;
 };
 
-export type JoinOperator =
-  | ','
-  | 'JOIN'
-  | 'LEFT OUTER JOIN'
-  | 'LEFT JOIN'
-  | 'INNER JOIN'
-  | 'CROSS JOIN'
-  | 'NATURAL JOIN'
-  | 'NATURAL LEFT OUTER JOIN'
-  | 'NATURAL LEFT JOIN'
-  | 'NATURAL INNER JOIN'
-  | 'NATURAL CROSS JOIN';
-
 export type LiteralValue = {
   type: 'LiteralValue';
   value: _LiteralValue;
@@ -802,8 +956,6 @@ export type SavepointStmt = {
   savepointName: string;
 };
 
-export type SelectCore = _SelectClause | _ValuesClause;
-
 export type SelectStmt = {
   type: 'SelectStmt';
   withClause: WithClause | null;
@@ -811,7 +963,7 @@ export type SelectStmt = {
   limiter: _LimiterClause | null;
 };
 
-/** SignedNumber (omitted syntax node) */
+/* SignedNumber (omitted syntax node) */
 
 export type SimpleFunctionInvocation = {
   type: 'SimpleFunctionInvocation';
@@ -865,7 +1017,7 @@ export type UpdateStmt = {
   limiter: _LimiterClause | null; // Merged from UpdateStmtLimited.
 };
 
-/** UpdateStmtLimited (merged into UpdateStmt) */
+/* UpdateStmtLimited (merged into UpdateStmt) */
 
 export type UpsertClause = {
   type: 'UpsertClause';
