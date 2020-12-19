@@ -1,0 +1,22 @@
+{
+  "name": "sqlite-ast",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types.d.ts",
+  "author": "Robin Blomberg",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobinBlomberg/sqlite-ast.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/RobinBlomberg/sqlite-ast/issues"
+  },
+  "homepage": "https://github.com/RobinBlomberg/sqlite-ast#readme",
+  "scripts": {
+    "test": "node ./lib/index.js"
+  }
+}
