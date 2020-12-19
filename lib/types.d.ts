@@ -1,3 +1,5 @@
+export {};
+
 declare function _AddClause(
   columnDef: ColumnDef
 ): _AddClause;
