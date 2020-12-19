@@ -22,7 +22,7 @@ export type _ColumnConstraintClause =
 export type _ExprClause = 
   | LiteralValue
   | _BindParameter
-  | ([string, string?, string?])
+  | _ColumnPath
   | _UnaryOperator
   | _BinaryExpression
   | _CallExpression
@@ -107,7 +107,6 @@ export type _Node =
   | _PragmaSetter
   | _PrimaryKeyClause
   | _PrimaryKeyConstraint
-  | _ReindexNameClause
   | _RenameClause
   | _SelectClause
   | _SelectCompound
@@ -378,6 +377,12 @@ export type _CteSelectClause = {
   as: SelectStmt;
 };
 
+export type _ColumnPath = {
+  type: '_ColumnPath';
+  tablePath: _Path | null;
+  columnName: string;
+};
+
 export type _DefaultClause = {
   type: '_DefaultClause';
   expr: Expr | LiteralValue | number;
@@ -506,6 +511,12 @@ export type _OnClause = {
   action: 'SET NULL' | 'SET DEFAULT' | 'CASCADE' | 'RESTRICT' | 'NO ACTION';
 };
 
+export type _Path = {
+  type: '_Path';
+  object: string | null;
+  property: string;
+};
+
 export type _PragmaGetter = {
   type: '_PragmaGetter';
   value: PragmaValue;
@@ -527,11 +538,6 @@ export type _PrimaryKeyConstraint = {
   type: '_PrimaryKeyConstraint';
   indexedColumns: [IndexedColumn, ...IndexedColumn[]];
   onConflict: null | ConflictClause;
-};
-
-export type _ReindexNameClause = {
-  type: '_ReindexNameClause';
-  name: [string, string] | string;
 };
 
 export type _RenameClause = {
@@ -584,7 +590,7 @@ export type _StringLiteral = {
 
 export type _TableCallClause = {
   type: '_TableCallClause';
-  name: [string, string] | string;
+  path: _Path;
   args: [Expr, ...Expr[]];
   tableAlias: string;
 };
@@ -609,7 +615,7 @@ export type _TableSelectClause = {
 
 export type _TableSelectorClause = {
   type: '_TableSelectorClause';
-  name: [string, string] | string;
+  path: _Path;
   args: Expr[];
 };
 
@@ -665,13 +671,13 @@ export type AggregateFunctionInvocation = {
 
 export type AlterTableStmt = {
   type: 'AlterTableStmt';
-  name: [string, string] | string;
+  path: _Path;
   action: _RenameClause | _AddClause;
 };
 
 export type AnalyzeStmt = {
   type: 'AnalyzeStmt';
-  name: null | [string, string] | string;
+  path: null | _Path;
 };
 
 export type AttachStmt = {
@@ -687,7 +693,7 @@ export type BeginStmt = {
 
 export type ColumnConstraint = {
   type: 'ColumnConstraint';
-  name: string | null;
+  path: string | null;
   constraint: _ColumnConstraintClause;
 };
 
@@ -732,7 +738,7 @@ export type CreateIndexStmt = {
   type: 'CreateIndexStmt';
   unique: boolean;
   ifNotExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
   tableName: string;
   selector: _ColumnSelectorClause;
 };
@@ -741,7 +747,7 @@ export type CreateTableStmt = {
   type: 'CreateTableStmt';
   temporary: boolean;
   ifNotExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
   target: SelectStmt | _TableDef;
 };
 
@@ -749,7 +755,7 @@ export type CreateTriggerStmt = {
   type: 'CreateTriggerStmt';
   temporary: boolean;
   ifNotExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null;
   event: 'DELETE' | 'INSERT' | _UpdateClause;
   tableName: string;
@@ -762,7 +768,7 @@ export type CreateViewStmt = {
   type: 'CreateViewStmt';
   temporary: boolean;
   ifNotExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
   columns: string[];
   select: SelectStmt;
 };
@@ -770,7 +776,7 @@ export type CreateViewStmt = {
 export type CreateVirtualTableStmt = {
   type: 'CreateVirtualTableStmt';
   ifNotExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
   moduleName: string;
   moduleArguments: string[];
 };
@@ -799,25 +805,25 @@ export type DetachStmt = {
 export type DropIndexStmt = {
   type: 'DropIndexStmt';
   ifExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
 };
 
 export type DropTableStmt = {
   type: 'DropTableStmt';
   ifExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
 };
 
 export type DropTriggerStmt = {
   type: 'DropTriggerStmt';
   ifExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
 };
 
 export type DropViewStmt = {
   type: 'DropViewStmt';
   ifExists: boolean;
-  name: [string, string] | string;
+  path: _Path;
 };
 
 export type Expr = {
@@ -863,7 +869,7 @@ export type InsertStmt = {
   type: 'InsertStmt';
   withClause: WithClause;
   operator: _InsertOperator;
-  name: [string, string] | string;
+  path: _Path;
   alias: string | null;
   columns: string[];
   source: _InsertValuesClause | _InsertSelectClause | 'DEFAULT VALUES';
@@ -902,7 +908,7 @@ export type OverClause = {
 
 export type PragmaStmt = {
   type: 'PragmaStmt';
-  name: [string, string] | string;
+  path: _Path;
   right: null | _PragmaSetter | _PragmaGetter;
 };
 
@@ -913,7 +919,7 @@ export type PragmaValue = {
 
 export type QualifiedTableName = {
   type: 'QualifiedTableName';
-  name: [string, string] | string;
+  path: _Path;
   alias: null | string;
   indexedBy: string | false | null;
 };
@@ -933,7 +939,7 @@ export type RecursiveCte = {
 
 export type ReindexStmt = {
   type: 'ReindexStmt';
-  target: null | string | _ReindexNameClause;
+  target: null | string | _Path;
 };
 
 export type ReleaseStmt = {
@@ -991,7 +997,7 @@ export type SqlStmtList = {
 
 export type TableConstraint = {
   type: 'TableConstraint';
-  name: null | string;
+  path: null | string;
   constraint: _TableConstraint;
 };
 
@@ -1010,7 +1016,7 @@ export type UpdateStmt = {
   type: 'UpdateStmt';
   withClause: WithClause;
   updateOr: null | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK';
-  name: QualifiedTableName;
+  path: QualifiedTableName;
   set: [_SetClause, ..._SetClause[]];
   from: _TableQueryClause;
   where: Expr | null;

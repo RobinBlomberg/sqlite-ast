@@ -87,6 +87,11 @@ declare function _ColumnAliasClause(
   as: string | null
 ): AST._ColumnAliasClause;
 
+declare function _ColumnPath(
+  tablePath: AST._Path | null,
+  columnName: string
+): AST._ColumnPath;
+
 declare function _ColumnSelectorClause(
   indexedColumns: [string, ...string[]],
   where: null | AST.Expr
@@ -203,6 +208,11 @@ declare function _OnClause(
   action: 'SET NULL' | 'SET DEFAULT' | 'CASCADE' | 'RESTRICT' | 'NO ACTION'
 ): AST._OnClause;
 
+declare function _Path(
+  object: string | null,
+  property: string
+): AST._Path;
+
 declare function _PragmaGetter(
   value: AST.PragmaValue
 ): AST._PragmaGetter;
@@ -221,10 +231,6 @@ declare function _PrimaryKeyConstraint(
   indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
   onConflict: null | AST.ConflictClause
 ): AST._PrimaryKeyConstraint;
-
-declare function _ReindexNameClause(
-  name: [string, string] | string
-): AST._ReindexNameClause;
 
 declare function _RenameClause(
   from: null | string,
@@ -267,7 +273,7 @@ declare function _StringLiteral(
 ): AST._StringLiteral;
 
 declare function _TableCallClause(
-  name: [string, string] | string,
+  path: AST._Path,
   args: [AST.Expr, ...AST.Expr[]],
   tableAlias: string
 ): AST._TableCallClause;
@@ -288,7 +294,7 @@ declare function _TableSelectClause(
 ): AST._TableSelectClause;
 
 declare function _TableSelectorClause(
-  name: [string, string] | string,
+  path: AST._Path,
   args: AST.Expr[]
 ): AST._TableSelectorClause;
 
@@ -330,12 +336,12 @@ declare function AggregateFunctionInvocation(
 ): AST.AggregateFunctionInvocation;
 
 declare function AlterTableStmt(
-  name: [string, string] | string,
+  path: AST._Path,
   action: AST._RenameClause | AST._AddClause
 ): AST.AlterTableStmt;
 
 declare function AnalyzeStmt(
-  name: null | [string, string] | string
+  path: null | AST._Path
 ): AST.AnalyzeStmt;
 
 declare function AttachStmt(
@@ -348,7 +354,7 @@ declare function BeginStmt(
 ): AST.BeginStmt;
 
 declare function ColumnConstraint(
-  name: string | null,
+  path: string | null,
   constraint: AST._ColumnConstraintClause
 ): AST.ColumnConstraint;
 
@@ -383,7 +389,7 @@ declare function ConflictClause(
 declare function CreateIndexStmt(
   unique: boolean,
   ifNotExists: boolean,
-  name: [string, string] | string,
+  path: AST._Path,
   tableName: string,
   selector: AST._ColumnSelectorClause
 ): AST.CreateIndexStmt;
@@ -391,14 +397,14 @@ declare function CreateIndexStmt(
 declare function CreateTableStmt(
   temporary: boolean,
   ifNotExists: boolean,
-  name: [string, string] | string,
+  path: AST._Path,
   target: AST.SelectStmt | AST._TableDef
 ): AST.CreateTableStmt;
 
 declare function CreateTriggerStmt(
   temporary: boolean,
   ifNotExists: boolean,
-  name: [string, string] | string,
+  path: AST._Path,
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null,
   event: 'DELETE' | 'INSERT' | AST._UpdateClause,
   tableName: string,
@@ -410,14 +416,14 @@ declare function CreateTriggerStmt(
 declare function CreateViewStmt(
   temporary: boolean,
   ifNotExists: boolean,
-  name: [string, string] | string,
+  path: AST._Path,
   columns: string[],
   select: AST.SelectStmt
 ): AST.CreateViewStmt;
 
 declare function CreateVirtualTableStmt(
   ifNotExists: boolean,
-  name: [string, string] | string,
+  path: AST._Path,
   moduleName: string,
   moduleArguments: string[]
 ): AST.CreateVirtualTableStmt;
@@ -440,22 +446,22 @@ declare function DetachStmt(
 
 declare function DropIndexStmt(
   ifExists: boolean,
-  name: [string, string] | string
+  path: AST._Path
 ): AST.DropIndexStmt;
 
 declare function DropTableStmt(
   ifExists: boolean,
-  name: [string, string] | string
+  path: AST._Path
 ): AST.DropTableStmt;
 
 declare function DropTriggerStmt(
   ifExists: boolean,
-  name: [string, string] | string
+  path: AST._Path
 ): AST.DropTriggerStmt;
 
 declare function DropViewStmt(
   ifExists: boolean,
-  name: [string, string] | string
+  path: AST._Path
 ): AST.DropViewStmt;
 
 declare function Expr(
@@ -494,7 +500,7 @@ declare function IndexedColumn(
 declare function InsertStmt(
   withClause: AST.WithClause,
   operator: AST._InsertOperator,
-  name: [string, string] | string,
+  path: AST._Path,
   alias: string | null,
   columns: string[],
   source: AST._InsertValuesClause | AST._InsertSelectClause | 'DEFAULT VALUES'
@@ -526,7 +532,7 @@ declare function OverClause(
 ): AST.OverClause;
 
 declare function PragmaStmt(
-  name: [string, string] | string,
+  path: AST._Path,
   right: null | AST._PragmaSetter | AST._PragmaGetter
 ): AST.PragmaStmt;
 
@@ -535,7 +541,7 @@ declare function PragmaValue(
 ): AST.PragmaValue;
 
 declare function QualifiedTableName(
-  name: [string, string] | string,
+  path: AST._Path,
   alias: null | string,
   indexedBy: string | false | null
 ): AST.QualifiedTableName;
@@ -552,7 +558,7 @@ declare function RecursiveCte(
 ): AST.RecursiveCte;
 
 declare function ReindexStmt(
-  target: null | string | AST._ReindexNameClause
+  target: null | string | AST._Path
 ): AST.ReindexStmt;
 
 declare function ReleaseStmt(
@@ -598,7 +604,7 @@ declare function SqlStmtList(
 ): AST.SqlStmtList;
 
 declare function TableConstraint(
-  name: null | string,
+  path: null | string,
   constraint: AST._TableConstraint
 ): AST.TableConstraint;
 
@@ -614,7 +620,7 @@ declare function TypeName(
 declare function UpdateStmt(
   withClause: AST.WithClause,
   updateOr: null | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK',
-  name: AST.QualifiedTableName,
+  path: AST.QualifiedTableName,
   set: [AST._SetClause, ...AST._SetClause[]],
   from: AST._TableQueryClause,
   where: AST.Expr | null,
