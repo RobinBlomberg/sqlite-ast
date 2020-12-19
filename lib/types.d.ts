@@ -1,4 +1,20 @@
-export {};
+export {
+  _BinaryOperator,
+  _ColumnConstraintClause,
+  _ExprClause,
+  _InsertOperator,
+  _LiteralValue,
+  _Node,
+  _SqlStmt,
+  _TableConstraint,
+  _TableOrSubquery,
+  _TriggerStmt,
+  _UnaryOperator,
+  CompoundOperator,
+  JoinOperator,
+  Node,
+  SelectCore
+} from './ast';
 
 declare function _AddClause(
   columnDef: ColumnDef
