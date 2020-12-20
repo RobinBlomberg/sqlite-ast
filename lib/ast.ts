@@ -183,7 +183,6 @@ export type Node =
   | DropTableStmt
   | DropTriggerStmt
   | DropViewStmt
-  | Expr
   | FactoredSelectStmt
   | FilterClause
   | ForeignKeyClause
@@ -192,7 +191,6 @@ export type Node =
   | InsertStmt
   | JoinClause
   | JoinConstraint
-  | LiteralValue
   | OrderingTerm
   | OverClause
   | PragmaStmt
