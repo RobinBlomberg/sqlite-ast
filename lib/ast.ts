@@ -21,7 +21,7 @@ export type _ColumnConstraintClause =
 
 export type _ExprClause = 
   | LiteralValue
-  | _BindParameter
+  | string
   | _ColumnPath
   | _UnaryOperator
   | _BinaryExpression
@@ -66,7 +66,6 @@ export type _Node =
   | _BetweenExpression
   | _BinaryExpression
   | _BinaryKeywordExpression
-  | _BindParameter
   | _BlobLiteral
   | _CallExpression
   | _CaseExpression
@@ -297,11 +296,6 @@ export type _BinaryKeywordExpression = {
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH';
   expr: Expr;
   escape: null | Expr;
-};
-
-export type _BindParameter = {
-  type: '_BindParameter';
-  bindParameter: string;
 };
 
 export type _BlobLiteral = {

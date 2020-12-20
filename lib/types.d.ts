@@ -34,10 +34,6 @@ declare function _BinaryKeywordExpression(
   escape: null | AST.Expr
 ): AST._BinaryKeywordExpression;
 
-declare function _BindParameter(
-  bindParameter: string
-): AST._BindParameter;
-
 declare function _BlobLiteral(
   value: string[]
 ): AST._BlobLiteral;
@@ -661,7 +657,6 @@ export const Nodes = {
   _BetweenExpression,
   _BinaryExpression,
   _BinaryKeywordExpression,
-  _BindParameter,
   _BlobLiteral,
   _CallExpression,
   _CaseExpression,
