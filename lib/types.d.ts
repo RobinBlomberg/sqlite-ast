@@ -136,10 +136,6 @@ declare function _GroupByClause(
   having: AST.Expr | null
 ): AST._GroupByClause;
 
-declare function _Identifier(
-  name: N
-): AST._Identifier;
-
 declare function _InExpression(
   negated: boolean,
   selector: AST._SelectorClause | AST._TableSelectorClause
@@ -520,7 +516,7 @@ declare function LiteralValue(
 
 declare function NumericLiteral(
   value: number
-): AST.NumericLiteral;
+): AST._NumericLiteral;
 
 declare function OrderingTerm(
   indexedColumn: AST.IndexedColumn,

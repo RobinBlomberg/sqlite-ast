@@ -48,17 +48,15 @@ export type _InsertOperator =
   | 'INSERT OR ROLLBACK';
 
 export type _LiteralValue =
-  | NumericLiteral
+  | _NumericLiteral
   | _StringLiteral
   | _BlobLiteral
-  | _Identifier<
-    | 'NULL'
-    | 'TRUE'
-    | 'FALSE'
-    | 'CURRENT_TIME'
-    | 'CURRENT_DATE'
-    | 'CURRENT_TIMESTAMP'
-  >;
+  'NULL'
+  'TRUE'
+  'FALSE'
+  'CURRENT_TIME'
+  'CURRENT_DATE'
+  'CURRENT_TIMESTAMP';
 
 export type _Node =
   | Node
@@ -88,7 +86,6 @@ export type _Node =
   | _FrameSpecBetweenClause
   | _FrameSpecExprClause
   | _GroupByClause
-  | _Identifier
   | _InExpression
   | _InsertSelectClause
   | _InsertValuesClause
@@ -102,6 +99,7 @@ export type _Node =
   | _MatchClause
   | _NotNullClause
   | _NullComparisonExpression
+  | _NumericLiteral
   | _OnClause
   | _PragmaGetter
   | _PragmaSetter
@@ -226,7 +224,6 @@ export type Node =
   | JoinClause
   | JoinConstraint
   | LiteralValue
-  | NumericLiteral
   | OrderingTerm
   | OverClause
   | PragmaStmt
@@ -424,11 +421,6 @@ export type _GroupByClause = {
   having: Expr | null;
 };
 
-export type _Identifier<N extends string = string> = {
-  type: '_Identifier';
-  name: N;
-};
-
 export type _InExpression = {
   type: '_InExpression';
   negated: boolean;
@@ -503,6 +495,11 @@ export type _NullComparisonExpression = {
   type: '_NullComparisonExpression';
   expr: Expr;
   negated: boolean;
+};
+
+export type _NumericLiteral = {
+  type: '_NumericLiteral';
+  value: number;
 };
 
 export type _OnClause = {
@@ -888,11 +885,6 @@ export type JoinConstraint = {
 export type LiteralValue = {
   type: 'LiteralValue';
   value: _LiteralValue;
-};
-
-export type NumericLiteral = {
-  type: 'NumericLiteral';
-  value: number;
 };
 
 export type OrderingTerm = {
