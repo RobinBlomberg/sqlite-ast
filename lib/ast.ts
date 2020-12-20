@@ -19,25 +19,6 @@ export type _ColumnConstraintClause =
   | ForeignKeyClause
   | _AsClause;
 
-export type _ExprClause = 
-  | LiteralValue
-  | string
-  | _ColumnPath
-  | _UnaryOperator
-  | _BinaryExpression
-  | _CallExpression
-  | _SequenceExpression
-  | _CastExpression
-  | _CollateExpression
-  | _BinaryKeywordExpression
-  | _NullComparisonExpression
-  | _IsExpression
-  | _BetweenExpression
-  | _InExpression
-  | _ExistsExpression
-  | _CaseExpression
-  | RaiseFunction;
-
 export type _InsertOperator =
   | 'REPLACE'
   | 'INSERT'
@@ -806,10 +787,24 @@ export type DropViewStmt = {
   path: _Path;
 };
 
-export type Expr = {
-  type: 'Expr';
-  expr: _ExprClause;
-};
+export type Expr =
+  | LiteralValue
+  | string
+  | _ColumnPath
+  | _UnaryOperator
+  | _BinaryExpression
+  | _CallExpression
+  | _SequenceExpression
+  | _CastExpression
+  | _CollateExpression
+  | _BinaryKeywordExpression
+  | _NullComparisonExpression
+  | _IsExpression
+  | _BetweenExpression
+  | _InExpression
+  | _ExistsExpression
+  | _CaseExpression
+  | RaiseFunction;
 
 export type FactoredSelectStmt = {
   type: 'FactoredSelectStmt';

@@ -452,10 +452,6 @@ declare function DropViewStmt(
   path: AST._Path
 ): AST.DropViewStmt;
 
-declare function Expr(
-  expr: AST._ExprClause
-): AST.Expr;
-
 declare function FactoredSelectStmt(
   withClause: AST.WithClause | null,
   selectors: [AST.SelectCore, ...AST._SelectCompound[]],
@@ -730,7 +726,6 @@ export const Nodes = {
   DropTableStmt,
   DropTriggerStmt,
   DropViewStmt,
-  Expr,
   FactoredSelectStmt,
   FilterClause,
   ForeignKeyClause,
