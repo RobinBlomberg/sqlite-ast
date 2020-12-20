@@ -199,6 +199,10 @@ declare function _NullComparisonExpression(
   negated: boolean
 ): AST._NullComparisonExpression;
 
+declare function _NumericLiteral(
+  value: number
+): AST._NumericLiteral;
+
 declare function _OnClause(
   on: 'DELETE' | 'UPDATE',
   action: 'SET NULL' | 'SET DEFAULT' | 'CASCADE' | 'RESTRICT' | 'NO ACTION'
@@ -514,10 +518,6 @@ declare function LiteralValue(
   value: AST._LiteralValue
 ): AST.LiteralValue;
 
-declare function NumericLiteral(
-  value: number
-): AST._NumericLiteral;
-
 declare function OrderingTerm(
   indexedColumn: AST.IndexedColumn,
   nulls: 'FIRST' | 'LAST' | null
@@ -695,6 +695,7 @@ export const Nodes = {
   _MatchClause,
   _NotNullClause,
   _NullComparisonExpression,
+  _NumericLiteral,
   _OnClause,
   _PragmaGetter,
   _PragmaSetter,
