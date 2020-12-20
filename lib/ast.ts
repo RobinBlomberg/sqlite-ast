@@ -691,7 +691,7 @@ export type CommitStmt = {
 };
 
 export type CommonTableExpression = {
-  type: 'CommonTableExpresison';
+  type: 'CommonTableExpression';
   tableName: string;
   columnNames: string[];
   as: SelectStmt;
