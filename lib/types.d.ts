@@ -735,7 +735,6 @@ export const Nodes = {
   JoinClause,
   JoinConstraint,
   LiteralValue,
-  NumericLiteral,
   OrderingTerm,
   OverClause,
   PragmaStmt,
