@@ -82,6 +82,7 @@ export type _Node =
   | _NullComparisonExpression
   | _NumericLiteral
   | _OnClause
+  | _Path
   | _PragmaGetter
   | _PragmaSetter
   | _PrimaryKeyClause

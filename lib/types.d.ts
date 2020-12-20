@@ -680,6 +680,7 @@ export const Nodes = {
   _NullComparisonExpression,
   _NumericLiteral,
   _OnClause,
+  _Path,
   _PragmaGetter,
   _PragmaSetter,
   _PrimaryKeyClause,
