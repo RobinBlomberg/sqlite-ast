@@ -36,6 +36,7 @@ export type _Node =
   | _BetweenExpression
   | _BinaryExpression
   | _BinaryKeywordExpression
+  | _BindParameter
   | _BlobLiteral
   | _CallExpression
   | _CaseExpression
@@ -136,14 +137,34 @@ export type _TableOrSubquery =
 
 export type _TriggerStmt = UpdateStmt | InsertStmt | DeleteStmt | SelectStmt;
 
-export type _UnaryOperator = string;
-
 /*
  * SQLite aliases
  * -------------------------------------------------------------------------------------------------
  */
 
 export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
+
+export type Expr =
+  | LiteralValue
+  | _BindParameter
+  | _ColumnPath
+  /**
+   * The UnaryOperator + is a no-op, and has been omitted here.
+   * @see https://sqlite.org/lang_expr.html
+   */
+  | _BinaryExpression
+  | _CallExpression
+  | _SequenceExpression
+  | _CastExpression
+  | _CollateExpression
+  | _BinaryKeywordExpression
+  | _NullComparisonExpression
+  | _IsExpression
+  | _BetweenExpression
+  | _InExpression
+  | _ExistsExpression
+  | _CaseExpression
+  | RaiseFunction;
 
 export type JoinOperator =
   | ','
@@ -263,6 +284,11 @@ export type _BinaryKeywordExpression = {
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH';
   expr: Expr;
   escape: null | Expr;
+};
+
+export type _BindParameter = {
+  type: '_BindParameter';
+  bindParameter: string;
 };
 
 export type _BlobLiteral = {
@@ -774,25 +800,6 @@ export type DropViewStmt = {
   ifExists: boolean;
   path: _Path;
 };
-
-export type Expr =
-  | LiteralValue
-  | string
-  | _ColumnPath
-  | _UnaryOperator
-  | _BinaryExpression
-  | _CallExpression
-  | _SequenceExpression
-  | _CastExpression
-  | _CollateExpression
-  | _BinaryKeywordExpression
-  | _NullComparisonExpression
-  | _IsExpression
-  | _BetweenExpression
-  | _InExpression
-  | _ExistsExpression
-  | _CaseExpression
-  | RaiseFunction;
 
 export type FactoredSelectStmt = {
   type: 'FactoredSelectStmt';
