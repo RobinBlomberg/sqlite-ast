@@ -77,6 +77,7 @@ export type _Node =
   | _CollateClause
   | _CollateExpression
   | _ColumnAliasClause
+  | _ColumnPath
   | _ColumnSelectorClause
   | _CteSelectClause
   | _DefaultClause
