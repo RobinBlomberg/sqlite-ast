@@ -346,7 +346,7 @@ declare function BeginStmt(
 ): AST.BeginStmt;
 
 declare function ColumnConstraint(
-  path: string | null,
+  name: null | string,
   constraint: AST._ColumnConstraintClause
 ): AST.ColumnConstraint;
 

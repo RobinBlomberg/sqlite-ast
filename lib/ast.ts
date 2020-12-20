@@ -668,7 +668,7 @@ export type BeginStmt = {
 
 export type ColumnConstraint = {
   type: 'ColumnConstraint';
-  path: string | null;
+  name: null | string;
   constraint: _ColumnConstraintClause;
 };
 
