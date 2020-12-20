@@ -236,7 +236,7 @@ declare function _RenameClause(
 declare function _SelectClause(
   modifier: null | 'DISTINCT' | 'ALL',
   resultColumns: [AST.ResultColumn, ...AST.ResultColumn[]],
-  from: AST._SelectFromClause,
+  from: AST.TableOrSubquery | null,
   where: null | AST.Expr,
   groupBy: null | AST._GroupByClause,
   window: AST._WindowAsClause[]
@@ -246,10 +246,6 @@ declare function _SelectCompound(
   operator: AST.CompoundOperator,
   selector: AST.SelectCore
 ): AST._SelectCompound;
-
-declare function _SelectFromClause(
-  query: AST.TableOrSubquery | null
-): AST._SelectFromClause;
 
 declare function _SelectorClause(
   selector: AST.SelectStmt | AST.Expr[]
@@ -699,7 +695,6 @@ export const Nodes = {
   _RenameClause,
   _SelectClause,
   _SelectCompound,
-  _SelectFromClause,
   _SelectorClause,
   _SequenceExpression,
   _SetClause,

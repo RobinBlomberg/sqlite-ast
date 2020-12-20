@@ -108,7 +108,6 @@ export type _Node =
   | _RenameClause
   | _SelectClause
   | _SelectCompound
-  | _SelectFromClause
   | _SelectorClause
   | _SequenceExpression
   | _SetClause
@@ -542,7 +541,7 @@ export type _SelectClause = {
   type: '_SelectClause';
   modifier: null | 'DISTINCT' | 'ALL';
   resultColumns: [ResultColumn, ...ResultColumn[]];
-  from: _SelectFromClause;
+  from: TableOrSubquery | null;
   where: null | Expr;
   groupBy: null | _GroupByClause;
   window: _WindowAsClause[];
@@ -552,11 +551,6 @@ export type _SelectCompound = {
   type: '_SelectCompound';
   operator: CompoundOperator;
   selector: SelectCore;
-};
-
-export type _SelectFromClause = {
-  type: '_SelectFromClause';
-  query: TableOrSubquery | null;
 };
 
 export type _SelectorClause = {
