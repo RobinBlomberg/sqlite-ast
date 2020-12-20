@@ -103,7 +103,7 @@ declare function _CteSelectClause(
 ): AST._CteSelectClause;
 
 declare function _DefaultClause(
-  expr: AST.Expr | AST.LiteralValue | number
+  expr: AST.Expr
 ): AST._DefaultClause;
 
 declare function _DeferrableClause(

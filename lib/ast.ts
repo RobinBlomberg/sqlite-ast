@@ -370,7 +370,7 @@ export type _ColumnPath = {
 
 export type _DefaultClause = {
   type: '_DefaultClause';
-  expr: Expr | LiteralValue | number; // LiteralValue exists in Expr, but can have a simpler syntax.
+  expr: Expr;
 };
 
 export type _DeferrableClause = {
