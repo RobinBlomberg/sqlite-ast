@@ -299,10 +299,6 @@ declare function _UniqueConstraint(
   conflict: null | AST.ConflictClause
 ): AST._UniqueConstraint;
 
-declare function _UpdateClause(
-  columnNames: string[]
-): AST._UpdateClause;
-
 declare function _UpdateSetClause(
   set: [AST._SetClause, ...AST._SetClause[]],
   where: null | AST.Expr
@@ -398,7 +394,7 @@ declare function CreateTriggerStmt(
   ifNotExists: boolean,
   path: AST._Path,
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null,
-  event: 'DELETE' | 'INSERT' | AST._UpdateClause,
+  event: 'DELETE' | 'INSERT' | string[],
   tableName: string,
   forEachRow: boolean,
   when: AST.Expr | null,
@@ -706,7 +702,6 @@ export const Nodes = {
   _TableSelectorClause,
   _UniqueClause,
   _UniqueConstraint,
-  _UpdateClause,
   _UpdateSetClause,
   _ValueClause,
   _ValuesClause,

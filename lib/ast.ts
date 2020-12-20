@@ -119,7 +119,6 @@ export type _Node =
   | _TableSelectorClause
   | _UniqueClause
   | _UniqueConstraint
-  | _UpdateClause
   | _UpdateSetClause
   | _ValueClause
   | _ValuesClause
@@ -616,11 +615,6 @@ export type _UniqueConstraint = {
   conflict: null | ConflictClause;
 };
 
-export type _UpdateClause = {
-  type: '_UpdateClause';
-  columnNames: string[];
-};
-
 export type _UpdateSetClause = {
   type: '_UpsertSetClause';
   set: [_SetClause, ..._SetClause[]];
@@ -743,7 +737,7 @@ export type CreateTriggerStmt = {
   ifNotExists: boolean;
   path: _Path;
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null;
-  event: 'DELETE' | 'INSERT' | _UpdateClause;
+  event: 'DELETE' | 'INSERT' | string[];
   tableName: string;
   forEachRow: boolean;
   when: Expr | null;
