@@ -498,10 +498,6 @@ declare function JoinConstraint(
   constraint: AST._JoinOnClause | AST._JoinUsingClause | null
 ): AST.JoinConstraint;
 
-declare function LiteralValue(
-  value: AST._LiteralValue
-): AST.LiteralValue;
-
 declare function OrderingTerm(
   indexedColumn: AST.IndexedColumn,
   nulls: 'FIRST' | 'LAST' | null
@@ -735,7 +731,6 @@ export const Nodes = {
   InsertStmt,
   JoinClause,
   JoinConstraint,
-  LiteralValue,
   OrderingTerm,
   OverClause,
   PragmaStmt,

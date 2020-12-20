@@ -28,17 +28,6 @@ export type _InsertOperator =
   | 'INSERT OR REPLACE'
   | 'INSERT OR ROLLBACK';
 
-export type _LiteralValue =
-  | _NumericLiteral
-  | _StringLiteral
-  | _BlobLiteral
-  'NULL'
-  'TRUE'
-  'FALSE'
-  'CURRENT_TIME'
-  'CURRENT_DATE'
-  'CURRENT_TIMESTAMP';
-
 export type _Node =
   | Node
   | _AddClause
@@ -357,7 +346,7 @@ export type _ColumnPath = {
 
 export type _DefaultClause = {
   type: '_DefaultClause';
-  expr: Expr | LiteralValue | number;
+  expr: Expr | LiteralValue | number; // LiteralValue exists in Expr, but can have a simpler syntax.
 };
 
 export type _DeferrableClause = {
@@ -861,10 +850,16 @@ export type JoinConstraint = {
   constraint: _JoinOnClause | _JoinUsingClause | null;
 };
 
-export type LiteralValue = {
-  type: 'LiteralValue';
-  value: _LiteralValue;
-};
+export type LiteralValue =
+  | _NumericLiteral
+  | _StringLiteral
+  | _BlobLiteral
+  'NULL'
+  'TRUE'
+  'FALSE'
+  'CURRENT_TIME'
+  'CURRENT_DATE'
+  'CURRENT_TIMESTAMP';
 
 export type OrderingTerm = {
   type: 'OrderingTerm';
