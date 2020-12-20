@@ -476,7 +476,7 @@ export type _MatchClause = {
 
 export type _NotNullClause = {
   type: '_NotNullClause';
-  onConflict: ConflictClause;
+  onConflict: null | ConflictClause;
 };
 
 export type _NullComparisonExpression = {
@@ -515,7 +515,7 @@ export type _PragmaSetter = {
 export type _PrimaryKeyClause = {
   type: '_PrimaryKeyClause';
   orderBy: null | 'ASC' | 'DESC';
-  onConflict: ConflictClause;
+  onConflict: null | ConflictClause;
   autoincrement: boolean;
 };
 
@@ -601,13 +601,13 @@ export type _TableSelectorClause = {
 
 export type _UniqueClause = {
   type: '_UniqueClause';
-  conflict: ConflictClause;
+  onConflict: null | ConflictClause;
 };
 
 export type _UniqueConstraint = {
   type: '_UniqueConstraint';
   indexedColumns: [IndexedColumn, ...IndexedColumn[]];
-  conflict: null | ConflictClause;
+  onConflict: null | ConflictClause;
 };
 
 export type _UpdateSetClause = {
@@ -706,7 +706,7 @@ export type CompoundSelectStmt = {
 
 export type ConflictClause = {
   type: 'ConflictClause';
-  onConflict: null | 'ROLLBACK' | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE';
+  onConflict: 'ROLLBACK' | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE';
 };
 
 export type CreateIndexStmt = {

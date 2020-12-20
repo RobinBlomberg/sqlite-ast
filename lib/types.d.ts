@@ -191,7 +191,7 @@ declare function _MatchClause(
 ): AST._MatchClause;
 
 declare function _NotNullClause(
-  onConflict: AST.ConflictClause
+  onConflict: null | AST.ConflictClause
 ): AST._NotNullClause;
 
 declare function _NullComparisonExpression(
@@ -223,7 +223,7 @@ declare function _PragmaSetter(
 
 declare function _PrimaryKeyClause(
   orderBy: null | 'ASC' | 'DESC',
-  onConflict: AST.ConflictClause,
+  onConflict: null | AST.ConflictClause,
   autoincrement: boolean
 ): AST._PrimaryKeyClause;
 
@@ -295,12 +295,12 @@ declare function _TableSelectorClause(
 ): AST._TableSelectorClause;
 
 declare function _UniqueClause(
-  conflict: AST.ConflictClause
+  onConflict: null | AST.ConflictClause
 ): AST._UniqueClause;
 
 declare function _UniqueConstraint(
   indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
-  conflict: null | AST.ConflictClause
+  onConflict: null | AST.ConflictClause
 ): AST._UniqueConstraint;
 
 declare function _UpdateSetClause(
@@ -375,7 +375,7 @@ declare function CompoundSelectStmt(
 ): AST.CompoundSelectStmt;
 
 declare function ConflictClause(
-  onConflict: null | 'ROLLBACK' | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE'
+  onConflict: 'ROLLBACK' | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE'
 ): AST.ConflictClause;
 
 declare function CreateIndexStmt(
