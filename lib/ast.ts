@@ -7,7 +7,7 @@
  * -------------------------------------------------------------------------------------------------
  */
 
-export type _BinaryOperator = _Identifier;
+export type _BinaryOperator = string;
 
 export type _ColumnConstraintClause =
   | _PrimaryKeyClause
