@@ -637,7 +637,7 @@ export type _ValuesClause = {
 export type _WindowAsClause = {
   type: '_WindowAsClause';
   windowName: _Identifier;
-  windowDefn: WindowDefn;
+  windowDefn: _Identifier;
 };
 
 /*

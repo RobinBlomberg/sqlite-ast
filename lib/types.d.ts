@@ -322,7 +322,7 @@ declare function _ValuesClause(
 
 declare function _WindowAsClause(
   windowName: AST._Identifier,
-  windowDefn: AST.WindowDefn
+  windowDefn: AST._Identifier
 ): AST._WindowAsClause;
 
 declare function AggregateFunctionInvocation(
