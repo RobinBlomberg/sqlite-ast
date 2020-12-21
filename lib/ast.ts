@@ -928,7 +928,7 @@ export type ReleaseStmt = {
 
 export type ResultColumn = {
   type: 'ResultColumn';
-  source: _ColumnAliasClause | _Identifier;
+  source: _ColumnAliasClause | '*' | _Identifier;
 };
 
 export type RollbackStmt = {

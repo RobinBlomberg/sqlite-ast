@@ -550,7 +550,7 @@ declare function ReleaseStmt(
 ): AST.ReleaseStmt;
 
 declare function ResultColumn(
-  source: AST._ColumnAliasClause | AST._Identifier
+  source: AST._ColumnAliasClause | '*' | AST._Identifier
 ): AST.ResultColumn;
 
 declare function RollbackStmt(
