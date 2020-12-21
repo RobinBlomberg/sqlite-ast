@@ -88,7 +88,7 @@ declare function _ColumnAliasClause(
 ): AST._ColumnAliasClause;
 
 declare function _ColumnPath(
-  tablePath: AST._Path | null,
+  tablePath: AST._Path | AST._Identifier,
   columnName: AST._Identifier
 ): AST._ColumnPath;
 
@@ -213,7 +213,7 @@ declare function _OnClause(
 ): AST._OnClause;
 
 declare function _Path(
-  object: AST._Identifier | null,
+  object: AST._Identifier,
   property: AST._Identifier
 ): AST._Path;
 
@@ -273,7 +273,7 @@ declare function _StringLiteral(
 ): AST._StringLiteral;
 
 declare function _TableCallClause(
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   args: [AST.Expr, ...AST.Expr[]],
   tableAlias: AST._Identifier
 ): AST._TableCallClause;
@@ -294,7 +294,7 @@ declare function _TableSelectClause(
 ): AST._TableSelectClause;
 
 declare function _TableSelectorClause(
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   args: AST.Expr[]
 ): AST._TableSelectorClause;
 
@@ -332,12 +332,12 @@ declare function AggregateFunctionInvocation(
 ): AST.AggregateFunctionInvocation;
 
 declare function AlterTableStmt(
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   action: AST._RenameClause | AST._AddClause
 ): AST.AlterTableStmt;
 
 declare function AnalyzeStmt(
-  path: null | AST._Path
+  path: AST._Path | AST._Identifier | null
 ): AST.AnalyzeStmt;
 
 declare function AttachStmt(
@@ -385,7 +385,7 @@ declare function ConflictClause(
 declare function CreateIndexStmt(
   unique: boolean,
   ifNotExists: boolean,
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   tableName: AST._Identifier,
   selector: AST._ColumnSelectorClause
 ): AST.CreateIndexStmt;
@@ -393,14 +393,14 @@ declare function CreateIndexStmt(
 declare function CreateTableStmt(
   temporary: boolean,
   ifNotExists: boolean,
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   target: AST.SelectStmt | AST._TableDef
 ): AST.CreateTableStmt;
 
 declare function CreateTriggerStmt(
   temporary: boolean,
   ifNotExists: boolean,
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null,
   event: 'DELETE' | 'INSERT' | AST._Identifier[],
   tableName: AST._Identifier,
@@ -412,14 +412,14 @@ declare function CreateTriggerStmt(
 declare function CreateViewStmt(
   temporary: boolean,
   ifNotExists: boolean,
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   columns: AST._Identifier[],
   select: AST.SelectStmt
 ): AST.CreateViewStmt;
 
 declare function CreateVirtualTableStmt(
   ifNotExists: boolean,
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   moduleName: AST._Identifier,
   moduleArguments: AST._Identifier[]
 ): AST.CreateVirtualTableStmt;
@@ -442,22 +442,22 @@ declare function DetachStmt(
 
 declare function DropIndexStmt(
   ifExists: boolean,
-  path: AST._Path
+  path: AST._Path | AST._Identifier
 ): AST.DropIndexStmt;
 
 declare function DropTableStmt(
   ifExists: boolean,
-  path: AST._Path
+  path: AST._Path | AST._Identifier
 ): AST.DropTableStmt;
 
 declare function DropTriggerStmt(
   ifExists: boolean,
-  path: AST._Path
+  path: AST._Path | AST._Identifier
 ): AST.DropTriggerStmt;
 
 declare function DropViewStmt(
   ifExists: boolean,
-  path: AST._Path
+  path: AST._Path | AST._Identifier
 ): AST.DropViewStmt;
 
 declare function FactoredSelectStmt(
@@ -492,7 +492,7 @@ declare function IndexedColumn(
 declare function InsertStmt(
   withClause: AST.WithClause,
   operator: AST._InsertOperator,
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   alias: AST._Identifier | null,
   columns: AST._Identifier[],
   source: AST._InsertValuesClause | AST._InsertSelectClause | 'DEFAULT VALUES'
@@ -516,7 +516,7 @@ declare function OverClause(
 ): AST.OverClause;
 
 declare function PragmaStmt(
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   right: null | AST._PragmaSetter | AST._PragmaGetter
 ): AST.PragmaStmt;
 
@@ -525,7 +525,7 @@ declare function PragmaValue(
 ): AST.PragmaValue;
 
 declare function QualifiedTableName(
-  path: AST._Path,
+  path: AST._Path | AST._Identifier,
   alias: null | AST._Identifier,
   indexedBy: AST._Identifier | false | null
 ): AST.QualifiedTableName;
@@ -542,7 +542,7 @@ declare function RecursiveCte(
 ): AST.RecursiveCte;
 
 declare function ReindexStmt(
-  target: null | AST._Identifier | AST._Path
+  target: AST._Path | AST._Identifier | null
 ): AST.ReindexStmt;
 
 declare function ReleaseStmt(

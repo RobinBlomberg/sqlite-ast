@@ -149,6 +149,8 @@ export type Expr =
   | LiteralValue
   | _BindParameter
   | _ColumnPath
+  | _Path
+  | _Identifier
   /**
    * The UnaryOperator + is a no-op, and has been omitted here.
    * @see https://sqlite.org/lang_expr.html
@@ -365,7 +367,7 @@ export type _CteSelectClause = {
 
 export type _ColumnPath = {
   type: '_ColumnPath';
-  tablePath: _Path | null;
+  tablePath: _Path | _Identifier;
   columnName: _Identifier;
 };
 
@@ -504,7 +506,7 @@ export type _OnClause = {
 
 export type _Path = {
   type: '_Path';
-  object: _Identifier | null;
+  object: _Identifier;
   property: _Identifier;
 };
 
@@ -576,7 +578,7 @@ export type _StringLiteral = {
 
 export type _TableCallClause = {
   type: '_TableCallClause';
-  path: _Path;
+  path: _Path | _Identifier;
   args: [Expr, ...Expr[]];
   tableAlias: _Identifier;
 };
@@ -601,7 +603,7 @@ export type _TableSelectClause = {
 
 export type _TableSelectorClause = {
   type: '_TableSelectorClause';
-  path: _Path;
+  path: _Path | _Identifier;
   args: Expr[];
 };
 
@@ -652,13 +654,13 @@ export type AggregateFunctionInvocation = {
 
 export type AlterTableStmt = {
   type: 'AlterTableStmt';
-  path: _Path;
+  path: _Path | _Identifier;
   action: _RenameClause | _AddClause;
 };
 
 export type AnalyzeStmt = {
   type: 'AnalyzeStmt';
-  path: null | _Path;
+  path: _Path | _Identifier | null;
 };
 
 export type AttachStmt = {
@@ -719,7 +721,7 @@ export type CreateIndexStmt = {
   type: 'CreateIndexStmt';
   unique: boolean;
   ifNotExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
   tableName: _Identifier;
   selector: _ColumnSelectorClause;
 };
@@ -728,7 +730,7 @@ export type CreateTableStmt = {
   type: 'CreateTableStmt';
   temporary: boolean;
   ifNotExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
   target: SelectStmt | _TableDef;
 };
 
@@ -736,7 +738,7 @@ export type CreateTriggerStmt = {
   type: 'CreateTriggerStmt';
   temporary: boolean;
   ifNotExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null;
   event: 'DELETE' | 'INSERT' | _Identifier[];
   tableName: _Identifier;
@@ -749,7 +751,7 @@ export type CreateViewStmt = {
   type: 'CreateViewStmt';
   temporary: boolean;
   ifNotExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
   columns: _Identifier[];
   select: SelectStmt;
 };
@@ -757,7 +759,7 @@ export type CreateViewStmt = {
 export type CreateVirtualTableStmt = {
   type: 'CreateVirtualTableStmt';
   ifNotExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
   moduleName: _Identifier;
   moduleArguments: _Identifier[];
 };
@@ -786,25 +788,25 @@ export type DetachStmt = {
 export type DropIndexStmt = {
   type: 'DropIndexStmt';
   ifExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
 };
 
 export type DropTableStmt = {
   type: 'DropTableStmt';
   ifExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
 };
 
 export type DropTriggerStmt = {
   type: 'DropTriggerStmt';
   ifExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
 };
 
 export type DropViewStmt = {
   type: 'DropViewStmt';
   ifExists: boolean;
-  path: _Path;
+  path: _Path | _Identifier;
 };
 
 export type FactoredSelectStmt = {
@@ -845,7 +847,7 @@ export type InsertStmt = {
   type: 'InsertStmt';
   withClause: WithClause;
   operator: _InsertOperator;
-  path: _Path;
+  path: _Path | _Identifier;
   alias: _Identifier | null;
   columns: _Identifier[];
   source: _InsertValuesClause | _InsertSelectClause | 'DEFAULT VALUES';
@@ -885,7 +887,7 @@ export type OverClause = {
 
 export type PragmaStmt = {
   type: 'PragmaStmt';
-  path: _Path;
+  path: _Path | _Identifier;
   right: null | _PragmaSetter | _PragmaGetter;
 };
 
@@ -896,7 +898,7 @@ export type PragmaValue = {
 
 export type QualifiedTableName = {
   type: 'QualifiedTableName';
-  path: _Path;
+  path: _Path | _Identifier;
   alias: null | _Identifier;
   indexedBy: _Identifier | false | null;
 };
@@ -916,7 +918,7 @@ export type RecursiveCte = {
 
 export type ReindexStmt = {
   type: 'ReindexStmt';
-  target: null | _Identifier | _Path;
+  target: _Path | _Identifier | null;
 };
 
 export type ReleaseStmt = {
