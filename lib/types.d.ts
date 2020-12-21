@@ -356,7 +356,7 @@ declare function ColumnConstraint(
 
 declare function ColumnDef(
   columnName: AST._Identifier,
-  typeName: string | null,
+  typeName: AST.TypeName | null,
   columnConstraints: AST.ColumnConstraint[]
 ): AST.ColumnDef;
 
