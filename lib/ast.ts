@@ -987,7 +987,7 @@ export type TableOrSubquery = {
 
 export type TypeName = {
   type: 'TypeName';
-  names: [_Identifier, ..._Identifier[]];
+  names: [string, ...string[]];
   args: [_NumericLiteral?, _NumericLiteral?];
 };
 

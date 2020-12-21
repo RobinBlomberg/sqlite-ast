@@ -597,7 +597,7 @@ declare function TableOrSubquery(
 ): AST.TableOrSubquery;
 
 declare function TypeName(
-  names: [AST._Identifier, ...AST._Identifier[]],
+  names: [string, ...string[]],
   args: [AST._NumericLiteral?, AST._NumericLiteral?]
 ): AST.TypeName;
 
