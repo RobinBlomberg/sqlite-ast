@@ -7,7 +7,7 @@
  * -------------------------------------------------------------------------------------------------
  */
 
-export type _BinaryOperator = string;
+export type _BinaryOperator = _Identifier;
 
 export type _ColumnConstraintClause =
   | _PrimaryKeyClause
@@ -57,6 +57,7 @@ export type _Node =
   | _FrameSpecBetweenClause
   | _FrameSpecExprClause
   | _GroupByClause
+  | _Identifier
   | _InExpression
   | _InsertSelectClause
   | _InsertValuesClause
@@ -288,7 +289,7 @@ export type _BinaryKeywordExpression = {
 
 export type _BindParameter = {
   type: '_BindParameter';
-  bindParameter: string;
+  bindParameter: _Identifier;
 };
 
 export type _BlobLiteral = {
@@ -298,7 +299,7 @@ export type _BlobLiteral = {
 
 export type _CallExpression = {
   type: '_CallExpression';
-  functionName: string;
+  functionName: _Identifier;
   args: Expr[] | '*';
   filter: null | FilterClause;
   over: null | OverClause;
@@ -335,24 +336,24 @@ export type _CheckConstraint = {
 
 export type _CollateClause = {
   type: '_CollateClause';
-  collationName: string;
+  collationName: _Identifier;
 };
 
 export type _CollateExpression = {
   type: '_CollateExpression';
   expr: Expr;
-  collationName: string;
+  collationName: _Identifier;
 };
 
 export type _ColumnAliasClause = {
   type: '_ColumnAliasClause';
   expr: Expr;
-  as: string | null;
+  as: _Identifier | null;
 };
 
 export type _ColumnSelectorClause = {
   type: '_ColumnSelectorClause';
-  indexedColumns: [string, ...string[]];
+  indexedColumns: [_Identifier, ..._Identifier[]];
   where: null | Expr;
 };
 
@@ -365,7 +366,7 @@ export type _CteSelectClause = {
 export type _ColumnPath = {
   type: '_ColumnPath';
   tablePath: _Path | null;
-  columnName: string;
+  columnName: _Identifier;
 };
 
 export type _DefaultClause = {
@@ -387,7 +388,7 @@ export type _ExistsExpression = {
 
 export type _ForeignKeyConstraint = {
   type: '_ForeignKeyConstraint';
-  columnNames: [string, ...string[]];
+  columnNames: [_Identifier, ..._Identifier[]];
   foreignKey: ForeignKeyClause;
 };
 
@@ -407,6 +408,11 @@ export type _GroupByClause = {
   type: '_GroupByClause';
   expressions: [Expr, ...Expr[]];
   having: Expr | null;
+};
+
+export type _Identifier = {
+  type: '_Identifier';
+  name: string;
 };
 
 export type _InExpression = {
@@ -448,7 +454,7 @@ export type _JoinOnClause = {
 
 export type _JoinUsingClause = {
   type: '_JoinUsingClause';
-  columnNames: [string, ...string[]];
+  columnNames: [_Identifier, ..._Identifier[]];
 };
 
 export type _LimitClause = {
@@ -471,7 +477,7 @@ export type _LimitTailClause = {
 
 export type _MatchClause = {
   type: '_MatchClause';
-  name: string;
+  name: _Identifier;
 };
 
 export type _NotNullClause = {
@@ -498,8 +504,8 @@ export type _OnClause = {
 
 export type _Path = {
   type: '_Path';
-  object: string | null;
-  property: string;
+  object: _Identifier | null;
+  property: _Identifier;
 };
 
 export type _PragmaGetter = {
@@ -527,8 +533,8 @@ export type _PrimaryKeyConstraint = {
 
 export type _RenameClause = {
   type: '_RenameClause';
-  from: null | string;
-  to: string;
+  from: null | _Identifier;
+  to: _Identifier;
 };
 
 export type _SelectClause = {
@@ -559,7 +565,7 @@ export type _SequenceExpression = {
 
 export type _SetClause = {
   type: '_SetClause';
-  columns: string | ColumnNameList;
+  columns: _Identifier | ColumnNameList;
   expr: Expr;
 };
 
@@ -572,7 +578,7 @@ export type _TableCallClause = {
   type: '_TableCallClause';
   path: _Path;
   args: [Expr, ...Expr[]];
-  tableAlias: string;
+  tableAlias: _Identifier;
 };
 
 export type _TableDef = {
@@ -590,7 +596,7 @@ export type _TableQueryClause = {
 export type _TableSelectClause = {
   type: '_TableSelectClause';
   select: SelectStmt;
-  tableAlias: string;
+  tableAlias: _Identifier;
 };
 
 export type _TableSelectorClause = {
@@ -628,7 +634,7 @@ export type _ValuesClause = {
 
 export type _WindowAsClause = {
   type: '_WindowAsClause';
-  windowName: string;
+  windowName: _Identifier;
   windowDefn: WindowDefn;
 };
 
@@ -639,7 +645,7 @@ export type _WindowAsClause = {
 
 export type AggregateFunctionInvocation = {
   type: 'AggregateFunctionInvocation';
-  aggregateFunc: string;
+  aggregateFunc: _Identifier;
   args: _AggregateArgs | '*' | null;
   filter: null | FilterClause;
 };
@@ -658,7 +664,7 @@ export type AnalyzeStmt = {
 export type AttachStmt = {
   type: 'AttachStmt';
   expr: Expr;
-  schemaName: string;
+  schemaName: _Identifier;
 };
 
 export type BeginStmt = {
@@ -668,20 +674,20 @@ export type BeginStmt = {
 
 export type ColumnConstraint = {
   type: 'ColumnConstraint';
-  name: null | string;
+  name: null | _Identifier;
   constraint: _ColumnConstraintClause;
 };
 
 export type ColumnDef = {
   type: 'ColumnDef';
-  columnName: string;
-  typeName: string | null;
+  columnName: _Identifier;
+  typeName: _Identifier | null;
   columnConstraints: ColumnConstraint[];
 };
 
 export type ColumnNameList = {
   type: 'ColumnNameList';
-  columnNames: [string, ...string[]];
+  columnNames: [_Identifier, ..._Identifier[]];
 };
 
 /* CommentSyntax (omitted syntax node) */
@@ -692,8 +698,8 @@ export type CommitStmt = {
 
 export type CommonTableExpression = {
   type: 'CommonTableExpression';
-  tableName: string;
-  columnNames: string[];
+  tableName: _Identifier;
+  columnNames: _Identifier[];
   as: SelectStmt;
 };
 
@@ -714,7 +720,7 @@ export type CreateIndexStmt = {
   unique: boolean;
   ifNotExists: boolean;
   path: _Path;
-  tableName: string;
+  tableName: _Identifier;
   selector: _ColumnSelectorClause;
 };
 
@@ -732,8 +738,8 @@ export type CreateTriggerStmt = {
   ifNotExists: boolean;
   path: _Path;
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null;
-  event: 'DELETE' | 'INSERT' | string[];
-  tableName: string;
+  event: 'DELETE' | 'INSERT' | _Identifier[];
+  tableName: _Identifier;
   forEachRow: boolean;
   when: Expr | null;
   begin: [_TriggerStmt, ..._TriggerStmt[]];
@@ -744,7 +750,7 @@ export type CreateViewStmt = {
   temporary: boolean;
   ifNotExists: boolean;
   path: _Path;
-  columns: string[];
+  columns: _Identifier[];
   select: SelectStmt;
 };
 
@@ -752,14 +758,14 @@ export type CreateVirtualTableStmt = {
   type: 'CreateVirtualTableStmt';
   ifNotExists: boolean;
   path: _Path;
-  moduleName: string;
-  moduleArguments: string[];
+  moduleName: _Identifier;
+  moduleArguments: _Identifier[];
 };
 
 export type CteTableName = {
   type: 'CteTableName';
-  tableName: string;
-  columnNames: string[];
+  tableName: _Identifier;
+  columnNames: _Identifier[];
 };
 
 export type DeleteStmt = {
@@ -774,7 +780,7 @@ export type DeleteStmt = {
 
 export type DetachStmt = {
   type: 'DetachStmt';
-  schemaName: string;
+  schemaName: _Identifier;
 };
 
 export type DropIndexStmt = {
@@ -815,8 +821,8 @@ export type FilterClause = {
 
 export type ForeignKeyClause = {
   type: 'ForeignKeyClause';
-  foreignTable: string;
-  columnNames: string[];
+  foreignTable: _Identifier;
+  columnNames: _Identifier[];
   events: (_OnClause | _MatchClause)[];
   deferrable: _DeferrableClause | null;
 };
@@ -830,8 +836,8 @@ export type FrameSpec = {
 
 export type IndexedColumn = {
   type: 'IndexedColumn';
-  target: string | Expr;
-  collationName: string | null;
+  target: _Identifier | Expr;
+  collationName: _Identifier | null;
   orderBy: null | 'ASC' | 'DESC';
 };
 
@@ -840,8 +846,8 @@ export type InsertStmt = {
   withClause: WithClause;
   operator: _InsertOperator;
   path: _Path;
-  alias: string | null;
-  columns: string[];
+  alias: _Identifier | null;
+  columns: _Identifier[];
   source: _InsertValuesClause | _InsertSelectClause | 'DEFAULT VALUES';
 };
 
@@ -874,7 +880,7 @@ export type OrderingTerm = {
 
 export type OverClause = {
   type: 'OverClause';
-  over: string | WindowDefn;
+  over: _Identifier | WindowDefn;
 };
 
 export type PragmaStmt = {
@@ -885,52 +891,52 @@ export type PragmaStmt = {
 
 export type PragmaValue = {
   type: 'PragmaValue';
-  value: number | string;
+  value: _NumericLiteral | _Identifier;
 };
 
 export type QualifiedTableName = {
   type: 'QualifiedTableName';
   path: _Path;
-  alias: null | string;
-  indexedBy: string | false | null;
+  alias: null | _Identifier;
+  indexedBy: _Identifier | false | null;
 };
 
 export type RaiseFunction = {
   type: 'RaiseFunction';
-  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', string] | null;
+  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', _Identifier] | null;
 };
 
 export type RecursiveCte = {
   type: 'RecursiveCte';
   cteTableName: CteTableName;
-  initialSelect: string;
+  initialSelect: _Identifier;
   all: boolean;
-  recursiveSelect: string;
+  recursiveSelect: _Identifier;
 };
 
 export type ReindexStmt = {
   type: 'ReindexStmt';
-  target: null | string | _Path;
+  target: null | _Identifier | _Path;
 };
 
 export type ReleaseStmt = {
   type: 'ReleaseStmt';
-  savepointName: string;
+  savepointName: _Identifier;
 };
 
 export type ResultColumn = {
   type: 'ResultColumn';
-  source: _ColumnAliasClause | string;
+  source: _ColumnAliasClause | _Identifier;
 };
 
 export type RollbackStmt = {
   type: 'RollbackStmt';
-  savepointName: string;
+  savepointName: _Identifier;
 };
 
 export type SavepointStmt = {
   type: 'SavepointStmt';
-  savepointName: string;
+  savepointName: _Identifier;
 };
 
 export type SelectStmt = {
@@ -944,7 +950,7 @@ export type SelectStmt = {
 
 export type SimpleFunctionInvocation = {
   type: 'SimpleFunctionInvocation';
-  simpleFunc: string;
+  simpleFunc: _Identifier;
   args: Expr[] | '*';
 };
 
@@ -968,7 +974,7 @@ export type SqlStmtList = {
 
 export type TableConstraint = {
   type: 'TableConstraint';
-  path: null | string;
+  path: null | _Identifier;
   constraint: _TableConstraint;
 };
 
@@ -979,8 +985,8 @@ export type TableOrSubquery = {
 
 export type TypeName = {
   type: 'TypeName';
-  names: [string, ...string[]];
-  args: [number?, number?];
+  names: [_Identifier, ..._Identifier[]];
+  args: [_NumericLiteral?, _NumericLiteral?];
 };
 
 export type UpdateStmt = {
@@ -1004,13 +1010,13 @@ export type UpsertClause = {
 
 export type VacuumStmt = {
   type: 'VacuumStmt';
-  schemaName: null | string;
-  filename: null | string;
+  schemaName: null | _Identifier;
+  filename: null | _Identifier;
 };
 
 export type WindowDefn = {
   type: 'WindowDefn';
-  baseWindowName: null | string;
+  baseWindowName: null | _Identifier;
   partitionBy: Expr[];
   orderBy: OrderingTerm[];
   frameSpec: FrameSpec | null;
@@ -1018,10 +1024,10 @@ export type WindowDefn = {
 
 export type WindowFunctionInvocation = {
   type: 'WindowFunctionInvocation';
-  windowFunc: string;
+  windowFunc: _Identifier;
   expr: Expr[] | '*';
   filter: null | FilterClause;
-  over: WindowDefn | string;
+  over: WindowDefn | _Identifier;
 };
 
 export type WithClause = {

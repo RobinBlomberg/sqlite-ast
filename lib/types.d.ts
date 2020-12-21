@@ -35,7 +35,7 @@ declare function _BinaryKeywordExpression(
 ): AST._BinaryKeywordExpression;
 
 declare function _BindParameter(
-  bindParameter: string
+  bindParameter: AST._Identifier
 ): Ast._BindParameter;
 
 declare function _BlobLiteral(
@@ -43,7 +43,7 @@ declare function _BlobLiteral(
 ): AST._BlobLiteral;
 
 declare function _CallExpression(
-  functionName: string,
+  functionName: AST._Identifier,
   args: AST.Expr[] | '*',
   filter: null | AST.FilterClause,
   over: null | AST.OverClause
@@ -74,26 +74,26 @@ declare function _CheckConstraint(
 ): AST._CheckConstraint;
 
 declare function _CollateClause(
-  collationName: string
+  collationName: AST._Identifier
 ): AST._CollateClause;
 
 declare function _CollateExpression(
   expr: AST.Expr,
-  collationName: string
+  collationName: AST._Identifier
 ): AST._CollateExpression;
 
 declare function _ColumnAliasClause(
   expr: AST.Expr,
-  as: string | null
+  as: AST._Identifier | null
 ): AST._ColumnAliasClause;
 
 declare function _ColumnPath(
   tablePath: AST._Path | null,
-  columnName: string
+  columnName: AST._Identifier
 ): AST._ColumnPath;
 
 declare function _ColumnSelectorClause(
-  indexedColumns: [string, ...string[]],
+  indexedColumns: [AST._Identifier, ...AST._Identifier[]],
   where: null | AST.Expr
 ): AST._ColumnSelectorClause;
 
@@ -117,7 +117,7 @@ declare function _ExistsExpression(
 ): AST._ExistsExpression;
 
 declare function _ForeignKeyConstraint(
-  columnNames: [string, ...string[]],
+  columnNames: [AST._Identifier, ...AST._Identifier[]],
   foreignKey: AST.ForeignKeyClause
 ): AST._ForeignKeyConstraint;
 
@@ -135,6 +135,10 @@ declare function _GroupByClause(
   expressions: [AST.Expr, ...AST.Expr[]],
   having: AST.Expr | null
 ): AST._GroupByClause;
+
+declare function _Identifier(
+  name: string
+): AST._Identifier;
 
 declare function _InExpression(
   negated: boolean,
@@ -168,7 +172,7 @@ declare function _JoinOnClause(
 ): AST._JoinOnClause;
 
 declare function _JoinUsingClause(
-  columnNames: [string, ...string[]]
+  columnNames: [AST._Identifier, ...AST._Identifier[]]
 ): AST._JoinUsingClause;
 
 declare function _LimitClause(
@@ -187,7 +191,7 @@ declare function _LimitTailClause(
 ): AST._LimitTailClause;
 
 declare function _MatchClause(
-  name: string
+  name: AST._Identifier
 ): AST._MatchClause;
 
 declare function _NotNullClause(
@@ -209,8 +213,8 @@ declare function _OnClause(
 ): AST._OnClause;
 
 declare function _Path(
-  object: string | null,
-  property: string
+  object: AST._Identifier | null,
+  property: AST._Identifier
 ): AST._Path;
 
 declare function _PragmaGetter(
@@ -233,8 +237,8 @@ declare function _PrimaryKeyConstraint(
 ): AST._PrimaryKeyConstraint;
 
 declare function _RenameClause(
-  from: null | string,
-  to: string
+  from: null | AST._Identifier,
+  to: AST._Identifier
 ): AST._RenameClause;
 
 declare function _SelectClause(
@@ -260,7 +264,7 @@ declare function _SequenceExpression(
 ): AST._SequenceExpression;
 
 declare function _SetClause(
-  columns: string | AST.ColumnNameList,
+  columns: AST._Identifier | AST.ColumnNameList,
   expr: AST.Expr
 ): AST._SetClause;
 
@@ -271,7 +275,7 @@ declare function _StringLiteral(
 declare function _TableCallClause(
   path: AST._Path,
   args: [AST.Expr, ...AST.Expr[]],
-  tableAlias: string
+  tableAlias: AST._Identifier
 ): AST._TableCallClause;
 
 declare function _TableDef(
@@ -286,7 +290,7 @@ declare function _TableQueryClause(
 
 declare function _TableSelectClause(
   select: AST.SelectStmt,
-  tableAlias: string
+  tableAlias: AST._Identifier
 ): AST._TableSelectClause;
 
 declare function _TableSelectorClause(
@@ -317,12 +321,12 @@ declare function _ValuesClause(
 ): AST._ValuesClause;
 
 declare function _WindowAsClause(
-  windowName: string,
+  windowName: AST._Identifier,
   windowDefn: AST.WindowDefn
 ): AST._WindowAsClause;
 
 declare function AggregateFunctionInvocation(
-  aggregateFunc: string,
+  aggregateFunc: AST._Identifier,
   args: AST._AggregateArgs | '*' | null,
   filter: null | AST.FilterClause
 ): AST.AggregateFunctionInvocation;
@@ -338,7 +342,7 @@ declare function AnalyzeStmt(
 
 declare function AttachStmt(
   expr: AST.Expr,
-  schemaName: string
+  schemaName: AST._Identifier
 ): AST.AttachStmt;
 
 declare function BeginStmt(
@@ -346,25 +350,25 @@ declare function BeginStmt(
 ): AST.BeginStmt;
 
 declare function ColumnConstraint(
-  name: null | string,
+  name: null | AST._Identifier,
   constraint: AST._ColumnConstraintClause
 ): AST.ColumnConstraint;
 
 declare function ColumnDef(
-  columnName: string,
-  typeName: string | null,
+  columnName: AST._Identifier,
+  typeName: AST._Identifier | null,
   columnConstraints: AST.ColumnConstraint[]
 ): AST.ColumnDef;
 
 declare function ColumnNameList(
-  columnNames: [string, ...string[]]
+  columnNames: [AST._Identifier, ...AST._Identifier[]]
 ): AST.ColumnNameList;
 
 declare function CommitStmt(): AST.CommitStmt;
 
 declare function CommonTableExpression(
-  tableName: string,
-  columnNames: string[],
+  tableName: AST._Identifier,
+  columnNames: AST._Identifier[],
   as: AST.SelectStmt
 ): AST.CommonTableExpression;
 
@@ -382,7 +386,7 @@ declare function CreateIndexStmt(
   unique: boolean,
   ifNotExists: boolean,
   path: AST._Path,
-  tableName: string,
+  tableName: AST._Identifier,
   selector: AST._ColumnSelectorClause
 ): AST.CreateIndexStmt;
 
@@ -398,8 +402,8 @@ declare function CreateTriggerStmt(
   ifNotExists: boolean,
   path: AST._Path,
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null,
-  event: 'DELETE' | 'INSERT' | string[],
-  tableName: string,
+  event: 'DELETE' | 'INSERT' | AST._Identifier[],
+  tableName: AST._Identifier,
   forEachRow: boolean,
   when: AST.Expr | null,
   begin: [AST._TriggerStmt, ...AST._TriggerStmt[]]
@@ -409,20 +413,20 @@ declare function CreateViewStmt(
   temporary: boolean,
   ifNotExists: boolean,
   path: AST._Path,
-  columns: string[],
+  columns: AST._Identifier[],
   select: AST.SelectStmt
 ): AST.CreateViewStmt;
 
 declare function CreateVirtualTableStmt(
   ifNotExists: boolean,
   path: AST._Path,
-  moduleName: string,
-  moduleArguments: string[]
+  moduleName: AST._Identifier,
+  moduleArguments: AST._Identifier[]
 ): AST.CreateVirtualTableStmt;
 
 declare function CteTableName(
-  tableName: string,
-  columnNames: string[]
+  tableName: AST._Identifier,
+  columnNames: AST._Identifier[]
 ): AST.CteTableName;
 
 declare function DeleteStmt(
@@ -433,7 +437,7 @@ declare function DeleteStmt(
 ): AST.DeleteStmt;
 
 declare function DetachStmt(
-  schemaName: string
+  schemaName: AST._Identifier
 ): AST.DetachStmt;
 
 declare function DropIndexStmt(
@@ -467,8 +471,8 @@ declare function FilterClause(
 ): AST.FilterClause;
 
 declare function ForeignKeyClause(
-  foreignTable: string,
-  columnNames: string[],
+  foreignTable: AST._Identifier,
+  columnNames: AST._Identifier[],
   events: (AST._OnClause | AST._MatchClause)[],
   deferrable: AST._DeferrableClause | null
 ): AST.ForeignKeyClause;
@@ -480,8 +484,8 @@ declare function FrameSpec(
 ): AST.FrameSpec;
 
 declare function IndexedColumn(
-  target: string | AST.Expr,
-  collationName: string | null,
+  target: AST._Identifier | AST.Expr,
+  collationName: AST._Identifier | null,
   orderBy: null | 'ASC' | 'DESC'
 ): AST.IndexedColumn;
 
@@ -489,8 +493,8 @@ declare function InsertStmt(
   withClause: AST.WithClause,
   operator: AST._InsertOperator,
   path: AST._Path,
-  alias: string | null,
-  columns: string[],
+  alias: AST._Identifier | null,
+  columns: AST._Identifier[],
   source: AST._InsertValuesClause | AST._InsertSelectClause | 'DEFAULT VALUES'
 ): AST.InsertStmt;
 
@@ -508,7 +512,7 @@ declare function OrderingTerm(
 ): AST.OrderingTerm;
 
 declare function OverClause(
-  over: string | AST.WindowDefn
+  over: AST._Identifier | AST.WindowDefn
 ): AST.OverClause;
 
 declare function PragmaStmt(
@@ -517,44 +521,44 @@ declare function PragmaStmt(
 ): AST.PragmaStmt;
 
 declare function PragmaValue(
-  value: number | string
+  value: AST._NumericLiteral | AST._Identifier
 ): AST.PragmaValue;
 
 declare function QualifiedTableName(
   path: AST._Path,
-  alias: null | string,
-  indexedBy: string | false | null
+  alias: null | AST._Identifier,
+  indexedBy: AST._Identifier | false | null
 ): AST.QualifiedTableName;
 
 declare function RaiseFunction(
-  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', string] | null
+  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', AST._Identifier] | null
 ): AST.RaiseFunction;
 
 declare function RecursiveCte(
   cteTableName: AST.CteTableName,
-  initialSelect: string,
+  initialSelect: AST._Identifier,
   all: boolean,
-  recursiveSelect: string
+  recursiveSelect: AST._Identifier
 ): AST.RecursiveCte;
 
 declare function ReindexStmt(
-  target: null | string | AST._Path
+  target: null | AST._Identifier | AST._Path
 ): AST.ReindexStmt;
 
 declare function ReleaseStmt(
-  savepointName: string
+  savepointName: AST._Identifier
 ): AST.ReleaseStmt;
 
 declare function ResultColumn(
-  source: AST._ColumnAliasClause | string
+  source: AST._ColumnAliasClause | AST._Identifier
 ): AST.ResultColumn;
 
 declare function RollbackStmt(
-  savepointName: string
+  savepointName: AST._Identifier
 ): AST.RollbackStmt;
 
 declare function SavepointStmt(
-  savepointName: string
+  savepointName: AST._Identifier
 ): AST.SavepointStmt;
 
 declare function SelectStmt(
@@ -564,7 +568,7 @@ declare function SelectStmt(
 ): AST.SelectStmt;
 
 declare function SimpleFunctionInvocation(
-  simpleFunc: string,
+  simpleFunc: AST._Identifier,
   args: AST.Expr[] | '*'
 ): AST.SimpleFunctionInvocation;
 
@@ -584,7 +588,7 @@ declare function SqlStmtList(
 ): AST.SqlStmtList;
 
 declare function TableConstraint(
-  path: null | string,
+  path: null | AST._Identifier,
   constraint: AST._TableConstraint
 ): AST.TableConstraint;
 
@@ -593,8 +597,8 @@ declare function TableOrSubquery(
 ): AST.TableOrSubquery;
 
 declare function TypeName(
-  names: [string, ...string[]],
-  args: [number?, number?]
+  names: [AST._Identifier, ...AST._Identifier[]],
+  args: [AST._NumericLiteral?, AST._NumericLiteral?]
 ): AST.TypeName;
 
 declare function UpdateStmt(
@@ -613,22 +617,22 @@ declare function UpsertClause(
 ): AST.UpsertClause;
 
 declare function VacuumStmt(
-  schemaName: null | string,
-  filename: null | string
+  schemaName: null | AST._Identifier,
+  filename: null | AST._Identifier
 ): AST.VacuumStmt;
 
 declare function WindowDefn(
-  baseWindowName: null | string,
+  baseWindowName: null | AST._Identifier,
   partitionBy: AST.Expr[],
   orderBy: AST.OrderingTerm[],
   frameSpec: AST.FrameSpec | null
 ): AST.WindowDefn;
 
 declare function WindowFunctionInvocation(
-  windowFunc: string,
+  windowFunc: AST._Identifier,
   expr: AST.Expr[] | '*',
   filter: null | AST.FilterClause,
-  over: AST.WindowDefn | string
+  over: AST.WindowDefn | AST._Identifier
 ): AST.WindowFunctionInvocation;
 
 declare function WithClause(
@@ -666,6 +670,7 @@ export const Nodes = {
   _FrameSpecBetweenClause,
   _FrameSpecExprClause,
   _GroupByClause,
+  _Identifier,
   _InExpression,
   _InsertSelectClause,
   _InsertValuesClause,
