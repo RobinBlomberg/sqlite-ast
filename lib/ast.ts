@@ -681,7 +681,7 @@ export type ColumnConstraint = {
 export type ColumnDef = {
   type: 'ColumnDef';
   columnName: _Identifier;
-  typeName: _Identifier | null;
+  typeName: string | null;
   columnConstraints: ColumnConstraint[];
 };
 
