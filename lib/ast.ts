@@ -577,7 +577,7 @@ export type _TableCallClause = {
   type: '_TableCallClause';
   path: _Path | _Identifier;
   args: [Expr, ...Expr[]];
-  tableAlias: _Identifier;
+  tableAlias: _Identifier | null;
 };
 
 export type _TableDef = {

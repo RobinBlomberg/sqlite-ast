@@ -274,7 +274,7 @@ declare function _StringLiteral(
 declare function _TableCallClause(
   path: AST._Path | AST._Identifier,
   args: [AST.Expr, ...AST.Expr[]],
-  tableAlias: AST._Identifier
+  tableAlias: AST._Identifier | null
 ): AST._TableCallClause;
 
 declare function _TableDef(
