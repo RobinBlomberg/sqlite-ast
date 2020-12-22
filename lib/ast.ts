@@ -616,7 +616,7 @@ export type _UniqueConstraint = {
 };
 
 export type _UpdateSetClause = {
-  type: '_UpsertSetClause';
+  type: '_UpdateSetClause';
   set: [_SetClause, ..._SetClause[]];
   where: null | Expr;
 };
