@@ -186,7 +186,6 @@ export type Node =
   | ColumnNameList
   | CommitStmt
   | CommonTableExpression
-  | CompoundSelectStmt
   | ConflictClause
   | CreateIndexStmt
   | CreateTableStmt
@@ -701,12 +700,7 @@ export type CommonTableExpression = {
   as: SelectStmt;
 };
 
-export type CompoundSelectStmt = {
-  type: 'CompoundSelectStmt';
-  withClause: WithClause | null;
-  select: [SelectCore, ..._SelectCompound[]];
-  limiter: _LimiterClause | null;
-};
+/* CompoundSelectStmt (duplicate of SelectStmt) */
 
 export type ConflictClause = {
   type: 'ConflictClause';

@@ -370,12 +370,6 @@ declare function CommonTableExpression(
   as: AST.SelectStmt
 ): AST.CommonTableExpression;
 
-declare function CompoundSelectStmt(
-  withClause: AST.WithClause | null,
-  select: [AST.SelectCore, ...AST._SelectCompound[]],
-  limiter: AST._LimiterClause | null
-): AST.CompoundSelectStmt;
-
 declare function ConflictClause(
   onConflict: 'ROLLBACK' | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE'
 ): AST.ConflictClause;
@@ -712,7 +706,6 @@ export const Nodes = {
   ColumnNameList,
   CommitStmt,
   CommonTableExpression,
-  CompoundSelectStmt,
   ConflictClause,
   CreateIndexStmt,
   CreateTableStmt,
