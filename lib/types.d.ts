@@ -586,10 +586,6 @@ declare function TableConstraint(
   constraint: AST._TableConstraint
 ): AST.TableConstraint;
 
-declare function TableOrSubquery(
-  query: AST._TableOrSubquery
-): AST.TableOrSubquery;
-
 declare function TypeName(
   names: [string, ...string[]],
   args: [AST._NumericLiteral?, AST._NumericLiteral?]
@@ -752,7 +748,6 @@ export const Nodes = {
   SqlStmt,
   SqlStmtList,
   TableConstraint,
-  TableOrSubquery,
   TypeName,
   UpdateStmt,
   UpsertClause,

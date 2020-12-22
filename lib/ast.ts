@@ -129,12 +129,6 @@ export type _TableConstraint =
   | _CheckConstraint
   | _ForeignKeyConstraint;
 
-export type _TableOrSubquery =
-  | QualifiedTableName
-  | _TableCallClause
-  | _TableSelectClause
-  | _TableQueryClause;
-
 export type _TriggerStmt = UpdateStmt | InsertStmt | DeleteStmt | SelectStmt;
 
 /*
@@ -232,7 +226,6 @@ export type Node =
   | SqlStmt
   | SqlStmtList
   | TableConstraint
-  | TableOrSubquery
   | TypeName
   | UpdateStmt
   | UpsertClause
@@ -242,6 +235,12 @@ export type Node =
   | WithClause;
 
 export type SelectCore = _SelectClause | _ValuesClause;
+
+export type TableOrSubquery =
+  | QualifiedTableName
+  | _TableCallClause
+  | _TableSelectClause
+  | _TableQueryClause;
 
 /*
   * Internal nodes
@@ -970,11 +969,6 @@ export type TableConstraint = {
   type: 'TableConstraint';
   path: null | _Identifier;
   constraint: _TableConstraint;
-};
-
-export type TableOrSubquery = {
-  type: 'TableOrSubquery';
-  query: _TableOrSubquery;
 };
 
 export type TypeName = {
