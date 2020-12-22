@@ -49,7 +49,6 @@ export type _Node =
   | _ColumnAliasClause
   | _ColumnPath
   | _ColumnSelectorClause
-  | _CteSelectClause
   | _DefaultClause
   | _DeferrableClause
   | _ExistsExpression
@@ -357,12 +356,6 @@ export type _ColumnSelectorClause = {
   type: '_ColumnSelectorClause';
   indexedColumns: [_Identifier, ..._Identifier[]];
   where: null | Expr;
-};
-
-export type _CteSelectClause = {
-  type: '_CteSelectClause';
-  cteTableName: CteTableName;
-  as: SelectStmt;
 };
 
 export type _ColumnPath = {
@@ -700,8 +693,7 @@ export type CommitStmt = {
 
 export type CommonTableExpression = {
   type: 'CommonTableExpression';
-  tableName: _Identifier;
-  columnNames: _Identifier[];
+  tableName: CteTableName;
   as: SelectStmt;
 };
 
@@ -1035,5 +1027,5 @@ export type WindowFunctionInvocation = {
 export type WithClause = {
   type: 'WithClause';
   recursive: boolean;
-  expressions: [_CteSelectClause, ..._CteSelectClause[]];
+  expressions: [CommonTableExpression, ...CommonTableExpression[]];
 };

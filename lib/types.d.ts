@@ -97,11 +97,6 @@ declare function _ColumnSelectorClause(
   where: null | AST.Expr
 ): AST._ColumnSelectorClause;
 
-declare function _CteSelectClause(
-  cteTableName: AST.CteTableName,
-  as: AST.SelectStmt
-): AST._CteSelectClause;
-
 declare function _DefaultClause(
   expr: AST.Expr
 ): AST._DefaultClause;
@@ -367,8 +362,7 @@ declare function ColumnNameList(
 declare function CommitStmt(): AST.CommitStmt;
 
 declare function CommonTableExpression(
-  tableName: AST._Identifier,
-  columnNames: AST._Identifier[],
+  tableName: AST.CteTableName,
   as: AST.SelectStmt
 ): AST.CommonTableExpression;
 
@@ -637,7 +631,7 @@ declare function WindowFunctionInvocation(
 
 declare function WithClause(
   recursive: boolean,
-  expressions: [AST._CteSelectClause, ...AST._CteSelectClause[]]
+  expressions: [AST.CommonTableExpression, ...AST.CommonTableExpression[]]
 ): AST.WithClause;
 
 export { AST };
@@ -662,7 +656,6 @@ export const Nodes = {
   _ColumnAliasClause,
   _ColumnPath,
   _ColumnSelectorClause,
-  _CteSelectClause,
   _DefaultClause,
   _DeferrableClause,
   _ExistsExpression,
