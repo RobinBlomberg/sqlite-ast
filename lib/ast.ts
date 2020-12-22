@@ -595,7 +595,7 @@ export type _TableQueryClause = {
 export type _TableSelectClause = {
   type: '_TableSelectClause';
   select: SelectStmt;
-  tableAlias: _Identifier;
+  tableAlias: _Identifier | null;
 };
 
 export type _TableSelectorClause = {

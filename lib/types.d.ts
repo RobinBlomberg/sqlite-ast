@@ -289,7 +289,7 @@ declare function _TableQueryClause(
 
 declare function _TableSelectClause(
   select: AST.SelectStmt,
-  tableAlias: AST._Identifier
+  tableAlias: AST._Identifier | null
 ): AST._TableSelectClause;
 
 declare function _TableSelectorClause(
