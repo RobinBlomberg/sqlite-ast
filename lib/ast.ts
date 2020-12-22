@@ -258,6 +258,11 @@ export type _AggregateArgs = {
   expressions: [Expr, ...Expr[]];
 };
 
+export type _AllColumnsClause = {
+  type: '_AllColumnsClause';
+  tableName: _Identifier;
+};
+
 export type _AsClause = {
   type: '_AsClause';
   generatedAlways: boolean;
@@ -348,7 +353,7 @@ export type _CollateExpression = {
 export type _ColumnAliasClause = {
   type: '_ColumnAliasClause';
   expr: Expr;
-  as: _Identifier | null;
+  as: _Identifier;
 };
 
 export type _ColumnSelectorClause = {
@@ -919,7 +924,7 @@ export type ReleaseStmt = {
 
 export type ResultColumn = {
   type: 'ResultColumn';
-  source: _ColumnAliasClause | '*' | _Identifier;
+  source: Expr | _ColumnAliasClause | '*' | _AllColumnsClause;
 };
 
 export type RollbackStmt = {

@@ -9,6 +9,10 @@ declare function _AggregateArgs(
   expressions: [AST.Expr, ...AST.Expr[]]
 ): AST._AggregateArgs;
 
+declare function _AllColumnsClause(
+  tableName: AST._Identifier
+): AST._AllColumnsClause;
+
 declare function _AsClause(
   generatedAlways: boolean,
   as: AST.Expr,
@@ -544,7 +548,7 @@ declare function ReleaseStmt(
 ): AST.ReleaseStmt;
 
 declare function ResultColumn(
-  source: AST._ColumnAliasClause | '*' | AST._Identifier
+  source: AST.Expr | AST._ColumnAliasClause | '*' | AST._AllColumnsClause
 ): AST.ResultColumn;
 
 declare function RollbackStmt(
