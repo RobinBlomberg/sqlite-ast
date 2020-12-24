@@ -305,7 +305,7 @@ export type _AsClause = {
   type: '_AsClause';
   generatedAlways: boolean;
   as: Expr;
-  mode: null | 'STORED' | 'VIRTUAL';
+  mode: 'STORED' | 'VIRTUAL' | null;
 };
 
 export type _BetweenExpression = {
@@ -329,7 +329,7 @@ export type _BinaryKeywordExpression = {
   negated: boolean;
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH';
   right: Expr;
-  escape: null | Expr;
+  escape: Expr | null;
 };
 
 export type _BindParameter = {
@@ -352,8 +352,8 @@ export type _CallExpression = {
   type: '_CallExpression';
   functionName: _Identifier;
   args: _Args | '*' | null;
-  filter: null | FilterClause;
-  over: null | OverClause;
+  filter: FilterClause | null;
+  over: OverClause | null;
 };
 
 export type _CaseExpression = {
@@ -405,7 +405,7 @@ export type _ColumnAliasClause = {
 export type _ColumnSelectorClause = {
   type: '_ColumnSelectorClause';
   indexedColumns: [_Identifier, ..._Identifier[]];
-  where: null | Expr;
+  where: Expr | null;
 };
 
 export type _DefaultClause = {
@@ -464,13 +464,13 @@ export type _InExpression = {
 export type _InsertSelectClause = {
   type: '_InsertSelectClause';
   select: SelectStmt;
-  upsert: null | UpsertClause;
+  upsert: UpsertClause | null;
 };
 
 export type _InsertValuesClause = {
   type: '_InsertValuesClause';
   values: _ValuesClause;
-  upsert: null | UpsertClause;
+  upsert: UpsertClause | null;
 };
 
 export type _IsExpression = {
@@ -533,7 +533,7 @@ export type _MatchClause = {
 
 export type _NotNullClause = {
   type: '_NotNullClause';
-  onConflict: null | ConflictClause;
+  onConflict: ConflictClause | null;
 };
 
 export type _NullComparisonExpression = {
@@ -571,15 +571,15 @@ export type _PragmaSetter = {
 
 export type _PrimaryKeyClause = {
   type: '_PrimaryKeyClause';
-  orderBy: null | 'ASC' | 'DESC';
-  onConflict: null | ConflictClause;
+  orderBy: 'ASC' | 'DESC' | null;
+  onConflict: ConflictClause | null;
   autoincrement: boolean;
 };
 
 export type _PrimaryKeyConstraint = {
   type: '_PrimaryKeyConstraint';
   indexedColumns: [IndexedColumn, ...IndexedColumn[]];
-  onConflict: null | ConflictClause;
+  onConflict: ConflictClause | null;
 };
 
 export type _QualifiedPath = {
@@ -590,17 +590,17 @@ export type _QualifiedPath = {
 
 export type _RenameClause = {
   type: '_RenameClause';
-  from: null | _Identifier;
+  from: _Identifier | null;
   to: _Identifier;
 };
 
 export type _SelectClause = {
   type: '_SelectClause';
-  modifier: null | 'DISTINCT' | 'ALL';
+  modifier: 'DISTINCT' | 'ALL' | null;
   resultColumns: [ResultColumn, ...ResultColumn[]];
   from: TableOrSubquery | null;
-  where: null | Expr;
-  groupBy: null | _GroupByClause;
+  where: Expr | null;
+  groupBy: _GroupByClause | null;
   window: _WindowAsClause[];
 };
 
@@ -674,19 +674,19 @@ export type _UnaryExpression = {
 
 export type _UniqueClause = {
   type: '_UniqueClause';
-  onConflict: null | ConflictClause;
+  onConflict: ConflictClause | null;
 };
 
 export type _UniqueConstraint = {
   type: '_UniqueConstraint';
   indexedColumns: [IndexedColumn, ...IndexedColumn[]];
-  onConflict: null | ConflictClause;
+  onConflict: ConflictClause | null;
 };
 
 export type _UpdateSetClause = {
   type: '_UpdateSetClause';
   set: [_SetClause, ..._SetClause[]];
-  where: null | Expr;
+  where: Expr | null;
 };
 
 export type _ValueClause = {
@@ -714,7 +714,7 @@ export type AggregateFunctionInvocation = {
   type: 'AggregateFunctionInvocation';
   aggregateFunc: _Identifier;
   args: _Args | '*' | null;
-  filter: null | FilterClause;
+  filter: FilterClause | null;
 };
 
 export type AlterTableStmt = {
@@ -736,12 +736,12 @@ export type AttachStmt = {
 
 export type BeginStmt = {
   type: 'BeginStmt';
-  mode: null | 'DEFERRED' | 'IMMEDIATE' | 'EXCLUSIVE';
+  mode: 'DEFERRED' | 'IMMEDIATE' | 'EXCLUSIVE' | null;
 };
 
 export type ColumnConstraint = {
   type: 'ColumnConstraint';
-  name: null | _Identifier;
+  name: _Identifier | null;
   constraint: _ColumnConstraintClause;
 };
 
@@ -899,7 +899,7 @@ export type IndexedColumn = {
   type: 'IndexedColumn';
   target: _Identifier | Expr;
   collationName: _Identifier | null;
-  orderBy: null | 'ASC' | 'DESC';
+  orderBy: 'ASC' | 'DESC' | null;
 };
 
 export type InsertStmt = {
@@ -942,7 +942,7 @@ export type OverClause = {
 export type PragmaStmt = {
   type: 'PragmaStmt';
   path: _Path | _Identifier;
-  right: null | _PragmaSetter | _PragmaGetter;
+  right: _PragmaSetter | _PragmaGetter | null;
 };
 
 export type PragmaValue = {
@@ -953,7 +953,7 @@ export type PragmaValue = {
 export type QualifiedTableName = {
   type: 'QualifiedTableName';
   path: _Path | _Identifier;
-  alias: null | _Identifier;
+  alias: _Identifier | null;
   indexedBy: _Identifier | false | null;
 };
 
@@ -1043,7 +1043,7 @@ export type TypeName = {
 export type UpdateStmt = {
   type: 'UpdateStmt';
   withClause: WithClause;
-  updateOr: null | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK';
+  updateOr: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null;
   path: QualifiedTableName;
   set: [_SetClause, ..._SetClause[]];
   from: _TableQueryClause;
@@ -1055,19 +1055,19 @@ export type UpdateStmt = {
 
 export type UpsertClause = {
   type: 'UpsertClause';
-  onConflict: null | _ColumnSelectorClause;
-  action: null | _UpdateSetClause;
+  onConflict: _ColumnSelectorClause | null;
+  action: _UpdateSetClause | null;
 };
 
 export type VacuumStmt = {
   type: 'VacuumStmt';
-  schemaName: null | _Identifier;
-  filename: null | _Identifier;
+  schemaName: _Identifier | null;
+  filename: _Identifier | null;
 };
 
 export type WindowDefn = {
   type: 'WindowDefn';
-  baseWindowName: null | _Identifier;
+  baseWindowName: _Identifier | null;
   partitionBy: Expr[];
   orderBy: OrderingTerm[];
   frameSpec: FrameSpec | null;
@@ -1077,7 +1077,7 @@ export type WindowFunctionInvocation = {
   type: 'WindowFunctionInvocation';
   windowFunc: _Identifier;
   expr: Expr[] | '*';
-  filter: null | FilterClause;
+  filter: FilterClause | null;
   over: WindowDefn | _Identifier;
 };
 

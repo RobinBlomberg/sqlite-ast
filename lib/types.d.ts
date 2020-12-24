@@ -16,7 +16,7 @@ declare function _Args(
 declare function _AsClause(
   generatedAlways: boolean,
   as: AST.Expr,
-  mode: null | 'STORED' | 'VIRTUAL'
+  mode: 'STORED' | 'VIRTUAL' | null
 ): AST._AsClause;
 
 declare function _BetweenExpression(
@@ -37,7 +37,7 @@ declare function _BinaryKeywordExpression(
   negated: boolean,
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH',
   right: AST.Expr,
-  escape: null | AST.Expr
+  escape: AST.Expr | null
 ): AST._BinaryKeywordExpression;
 
 declare function _BindParameter(
@@ -51,8 +51,8 @@ declare function _BlobLiteral(
 declare function _CallExpression(
   functionName: AST._Identifier,
   args: AST._Args | '*' | null,
-  filter: null | AST.FilterClause,
-  over: null | AST.OverClause
+  filter: AST.FilterClause | null,
+  over: AST.OverClause | null
 ): AST._CallExpression;
 
 declare function _CaseExpression(
@@ -95,7 +95,7 @@ declare function _ColumnAliasClause(
 
 declare function _ColumnSelectorClause(
   indexedColumns: [AST._Identifier, ...AST._Identifier[]],
-  where: null | AST.Expr
+  where: AST.Expr | null
 ): AST._ColumnSelectorClause;
 
 declare function _DefaultClause(
@@ -144,12 +144,12 @@ declare function _InExpression(
 
 declare function _InsertSelectClause(
   select: AST.SelectStmt,
-  upsert: null | AST.UpsertClause
+  upsert: AST.UpsertClause | null
 ): AST._InsertSelectClause;
 
 declare function _InsertValuesClause(
   values: AST._ValuesClause,
-  upsert: null | AST.UpsertClause
+  upsert: AST.UpsertClause | null
 ): AST._InsertValuesClause;
 
 declare function _IsExpression(
@@ -196,7 +196,7 @@ declare function _MatchClause(
 ): AST._MatchClause;
 
 declare function _NotNullClause(
-  onConflict: null | AST.ConflictClause
+  onConflict: AST.ConflictClause | null
 ): AST._NotNullClause;
 
 declare function _NullComparisonExpression(
@@ -227,14 +227,14 @@ declare function _PragmaSetter(
 ): AST._PragmaSetter;
 
 declare function _PrimaryKeyClause(
-  orderBy: null | 'ASC' | 'DESC',
-  onConflict: null | AST.ConflictClause,
+  orderBy: 'ASC' | 'DESC' | null,
+  onConflict: AST.ConflictClause | null,
   autoincrement: boolean
 ): AST._PrimaryKeyClause;
 
 declare function _PrimaryKeyConstraint(
   indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
-  onConflict: null | AST.ConflictClause
+  onConflict: AST.ConflictClause | null
 ): AST._PrimaryKeyConstraint;
 
 declare function _QualifiedPath(
@@ -243,16 +243,16 @@ declare function _QualifiedPath(
 ): AST._QualifiedPath;
 
 declare function _RenameClause(
-  from: null | AST._Identifier,
+  from: AST._Identifier | null,
   to: AST._Identifier
 ): AST._RenameClause;
 
 declare function _SelectClause(
-  modifier: null | 'DISTINCT' | 'ALL',
+  modifier: 'DISTINCT' | 'ALL' | null,
   resultColumns: [AST.ResultColumn, ...AST.ResultColumn[]],
   from: AST.TableOrSubquery | null,
-  where: null | AST.Expr,
-  groupBy: null | AST._GroupByClause,
+  where: AST.Expr | null,
+  groupBy: AST._GroupByClause | null,
   window: AST._WindowAsClause[]
 ): AST._SelectClause;
 
@@ -310,17 +310,17 @@ declare function _UnaryExpression(
 ): Ast._UnaryExpression;
 
 declare function _UniqueClause(
-  onConflict: null | AST.ConflictClause
+  onConflict: AST.ConflictClause | null
 ): AST._UniqueClause;
 
 declare function _UniqueConstraint(
   indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
-  onConflict: null | AST.ConflictClause
+  onConflict: AST.ConflictClause | null
 ): AST._UniqueConstraint;
 
 declare function _UpdateSetClause(
   set: [AST._SetClause, ...AST._SetClause[]],
-  where: null | AST.Expr
+  where: AST.Expr | null
 ): AST._UpdateSetClause;
 
 declare function _ValueClause(
@@ -339,7 +339,7 @@ declare function _WindowAsClause(
 declare function AggregateFunctionInvocation(
   aggregateFunc: AST._Identifier,
   args: AST._Args | '*' | null,
-  filter: null | AST.FilterClause
+  filter: AST.FilterClause | null
 ): AST.AggregateFunctionInvocation;
 
 declare function AlterTableStmt(
@@ -357,11 +357,11 @@ declare function AttachStmt(
 ): AST.AttachStmt;
 
 declare function BeginStmt(
-  mode: null | 'DEFERRED' | 'IMMEDIATE' | 'EXCLUSIVE'
+  mode: 'DEFERRED' | 'IMMEDIATE' | 'EXCLUSIVE' | null
 ): AST.BeginStmt;
 
 declare function ColumnConstraint(
-  name: null | AST._Identifier,
+  name: AST._Identifier | null,
   constraint: AST._ColumnConstraintClause
 ): AST.ColumnConstraint;
 
@@ -490,7 +490,7 @@ declare function FrameSpec(
 declare function IndexedColumn(
   target: AST._Identifier | AST.Expr,
   collationName: AST._Identifier | null,
-  orderBy: null | 'ASC' | 'DESC'
+  orderBy: 'ASC' | 'DESC' | null
 ): AST.IndexedColumn;
 
 declare function InsertStmt(
@@ -521,7 +521,7 @@ declare function OverClause(
 
 declare function PragmaStmt(
   path: AST._Path | AST._Identifier,
-  right: null | AST._PragmaSetter | AST._PragmaGetter
+  right: AST._PragmaSetter | AST._PragmaGetter | null
 ): AST.PragmaStmt;
 
 declare function PragmaValue(
@@ -530,7 +530,7 @@ declare function PragmaValue(
 
 declare function QualifiedTableName(
   path: AST._Path | AST._Identifier,
-  alias: null | AST._Identifier,
+  alias: AST._Identifier | null,
   indexedBy: AST._Identifier | false | null
 ): AST.QualifiedTableName;
 
@@ -603,7 +603,7 @@ declare function TypeName(
 
 declare function UpdateStmt(
   withClause: AST.WithClause,
-  updateOr: null | 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK',
+  updateOr: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null,
   path: AST.QualifiedTableName,
   set: [AST._SetClause, ...AST._SetClause[]],
   from: AST._TableQueryClause,
@@ -612,17 +612,17 @@ declare function UpdateStmt(
 ): AST.UpdateStmt;
 
 declare function UpsertClause(
-  onConflict: null | AST._ColumnSelectorClause,
-  action: null | AST._UpdateSetClause
+  onConflict: AST._ColumnSelectorClause | null,
+  action: AST._UpdateSetClause | null
 ): AST.UpsertClause;
 
 declare function VacuumStmt(
-  schemaName: null | AST._Identifier,
-  filename: null | AST._Identifier
+  schemaName: AST._Identifier | null,
+  filename: AST._Identifier | null
 ): AST.VacuumStmt;
 
 declare function WindowDefn(
-  baseWindowName: null | AST._Identifier,
+  baseWindowName: AST._Identifier | null,
   partitionBy: AST.Expr[],
   orderBy: AST.OrderingTerm[],
   frameSpec: AST.FrameSpec | null
@@ -631,7 +631,7 @@ declare function WindowDefn(
 declare function WindowFunctionInvocation(
   windowFunc: AST._Identifier,
   expr: AST.Expr[] | '*',
-  filter: null | AST.FilterClause,
+  filter: AST.FilterClause | null,
   over: AST.WindowDefn | AST._Identifier
 ): AST.WindowFunctionInvocation;
 
