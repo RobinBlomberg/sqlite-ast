@@ -309,6 +309,7 @@ export type _AsClause = {
 
 export type _BetweenExpression = {
   type: '_BetweenExpression';
+  argument: Expr;
   negated: boolean;
   lower: Expr;
   upper: Expr;

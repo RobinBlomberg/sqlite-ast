@@ -20,6 +20,7 @@ declare function _AsClause(
 ): AST._AsClause;
 
 declare function _BetweenExpression(
+  argument: AST.Expr,
   negated: boolean,
   lower: AST.Expr,
   upper: AST.Expr
