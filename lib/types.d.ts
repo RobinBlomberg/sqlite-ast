@@ -580,7 +580,7 @@ declare function SqlStmtList(
 ): AST.SqlStmtList;
 
 declare function TableConstraint(
-  path: null | AST._Identifier,
+  name: AST._Identifier | null,
   constraint: AST._TableConstraint
 ): AST.TableConstraint;
 

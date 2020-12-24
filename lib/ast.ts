@@ -966,7 +966,7 @@ export type SqlStmtList = {
 
 export type TableConstraint = {
   type: 'TableConstraint';
-  path: null | _Identifier;
+  name: _Identifier | null;
   constraint: _TableConstraint;
 };
 
