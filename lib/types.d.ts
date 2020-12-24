@@ -174,6 +174,10 @@ declare function _JoinUsingClause(
   columnNames: [AST._Identifier, ...AST._Identifier[]]
 ): AST._JoinUsingClause;
 
+declare function _KeywordLiteral(
+  value: 'NULL' | 'TRUE' | 'FALSE' | 'CURRENT_TIME' | 'CURRENT_DATE' | 'CURRENT_TIMESTAMP'
+): AST._KeywordLiteral
+
 declare function _LimitClause(
   left: AST.Expr,
   right: AST._LimitTailClause | null

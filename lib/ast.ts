@@ -64,6 +64,7 @@ export type _Node =
   | _JoinCompound
   | _JoinOnClause
   | _JoinUsingClause
+  | _KeywordLiteral
   | _LimitClause
   | _LimiterClause
   | _LimitTailClause
@@ -453,6 +454,17 @@ export type _JoinOnClause = {
 export type _JoinUsingClause = {
   type: '_JoinUsingClause';
   columnNames: [_Identifier, ..._Identifier[]];
+};
+
+export type _KeywordLiteral = {
+  type: '_KeywordLiteral';
+  value:
+    | 'NULL'
+    | 'TRUE'
+    | 'FALSE'
+    | 'CURRENT_TIME'
+    | 'CURRENT_DATE'
+    | 'CURRENT_TIMESTAMP';
 };
 
 export type _LimitClause = {
@@ -857,12 +869,7 @@ export type LiteralValue =
   | _NumericLiteral
   | _StringLiteral
   | _BlobLiteral
-  | 'NULL'
-  | 'TRUE'
-  | 'FALSE'
-  | 'CURRENT_TIME'
-  | 'CURRENT_DATE'
-  | 'CURRENT_TIMESTAMP';
+  | _KeywordLiteral;
 
 export type OrderingTerm = {
   type: 'OrderingTerm';
