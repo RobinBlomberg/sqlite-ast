@@ -902,7 +902,7 @@ export type QualifiedTableName = {
 
 export type RaiseFunction = {
   type: 'RaiseFunction';
-  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', _Identifier] | null;
+  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', _StringLiteral] | null;
 };
 
 export type RecursiveCte = {

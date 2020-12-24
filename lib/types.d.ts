@@ -527,7 +527,7 @@ declare function QualifiedTableName(
 ): AST.QualifiedTableName;
 
 declare function RaiseFunction(
-  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', AST._Identifier] | null
+  onError: ['ROLLBACK' | 'ABORT' | 'FAIL', AST._StringLiteral] | null
 ): AST.RaiseFunction;
 
 declare function RecursiveCte(
