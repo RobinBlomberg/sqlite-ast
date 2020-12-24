@@ -32,9 +32,10 @@ declare function _BinaryExpression(
 ): AST._BinaryExpression;
 
 declare function _BinaryKeywordExpression(
+  left: AST.Expr,
   negated: boolean,
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH',
-  expr: AST.Expr,
+  right: AST.Expr,
   escape: null | AST.Expr
 ): AST._BinaryKeywordExpression;
 

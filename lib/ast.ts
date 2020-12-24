@@ -323,9 +323,10 @@ export type _BinaryExpression = {
 
 export type _BinaryKeywordExpression = {
   type: '_BinaryKeywordExpression';
+  left: Expr;
   negated: boolean;
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH';
-  expr: Expr;
+  right: Expr;
   escape: null | Expr;
 };
 
