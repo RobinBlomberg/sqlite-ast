@@ -730,7 +730,7 @@ export type CreateTriggerStmt = {
   ifNotExists: boolean;
   path: _Path | _Identifier;
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null;
-  event: 'DELETE' | 'INSERT' | _Identifier[];
+  event: 'DELETE' | 'INSERT' | 'UPDATE' | _Identifier[];
   tableName: _Identifier;
   forEachRow: boolean;
   when: Expr | null;

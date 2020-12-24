@@ -394,7 +394,7 @@ declare function CreateTriggerStmt(
   ifNotExists: boolean,
   path: AST._Path | AST._Identifier,
   position: 'BEFORE' | 'AFTER' | 'INSTEAD OF' | null,
-  event: 'DELETE' | 'INSERT' | AST._Identifier[],
+  event: 'DELETE' | 'INSERT' | 'UPDATE' | AST._Identifier[],
   tableName: AST._Identifier,
   forEachRow: boolean,
   when: AST.Expr | null,
