@@ -120,6 +120,7 @@ export type _Node =
   | _TableQueryClause
   | _TableSelectClause
   | _TableSelectorClause
+  | _UnaryExpression
   | _UniqueClause
   | _UniqueConstraint
   | _UpdateSetClause
