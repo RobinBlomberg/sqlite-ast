@@ -484,7 +484,7 @@ export type _JoinCompound = {
   type: '_JoinCompound';
   operator: JoinOperator;
   query: TableOrSubquery;
-  constraint: JoinConstraint;
+  constraint: JoinConstraint | null;
 };
 
 export type _JoinOnClause = {
@@ -919,7 +919,7 @@ export type JoinClause = {
 
 export type JoinConstraint = {
   type: 'JoinConstraint';
-  constraint: _JoinOnClause | _JoinUsingClause | null;
+  constraint: _JoinOnClause | _JoinUsingClause;
 };
 
 export type LiteralValue =

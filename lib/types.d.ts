@@ -161,7 +161,7 @@ declare function _IsExpression(
 declare function _JoinCompound(
   operator: AST.JoinOperator,
   query: AST.TableOrSubquery,
-  constraint: AST.JoinConstraint
+  constraint: AST.JoinConstraint | null
 ): AST._JoinCompound;
 
 declare function _JoinOnClause(
@@ -507,7 +507,7 @@ declare function JoinClause(
 ): AST.JoinClause;
 
 declare function JoinConstraint(
-  constraint: AST._JoinOnClause | AST._JoinUsingClause | null
+  constraint: AST._JoinOnClause | AST._JoinUsingClause
 ): AST.JoinConstraint;
 
 declare function OrderingTerm(
