@@ -301,6 +301,11 @@ declare function _TableSelectorClause(
   args: AST.Expr[]
 ): AST._TableSelectorClause;
 
+declare function _UnaryExpression(
+  operator: AST._UnaryOperator,
+  argument: AST.Expr
+): Ast._UnaryExpression;
+
 declare function _UniqueClause(
   onConflict: null | AST.ConflictClause
 ): AST._UniqueClause;
@@ -695,6 +700,7 @@ export const Nodes = {
   _TableQueryClause,
   _TableSelectClause,
   _TableSelectorClause,
+  _UnaryExpression,
   _UniqueClause,
   _UniqueConstraint,
   _UpdateSetClause,

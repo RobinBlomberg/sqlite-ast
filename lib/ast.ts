@@ -7,7 +7,37 @@
  * -------------------------------------------------------------------------------------------------
  */
 
-export type _BinaryOperator = string;
+/**
+ * @see https://sqlite.org/lang_expr.html#operators
+ */
+export type _BinaryOperator =
+  | '||'
+  | '*'
+  | '/'
+  | '%'
+  | '+'
+  | '-'
+  | '<<'
+  | '>>'
+  | '&'
+  | '|'
+  | '<'
+  | '<='
+  | '>'
+  | '>='
+  | '='
+  | '=='
+  | '!='
+  | '<>'
+  | 'IS'
+  | 'IS NOT'
+  | 'IN'
+  | 'LIKE'
+  | 'GLOB'
+  | 'MATCH'
+  | 'REGEXP'
+  | 'AND'
+  | 'OR';
 
 export type _ColumnConstraintClause =
   | _PrimaryKeyClause
@@ -132,6 +162,15 @@ export type _TableConstraint =
 
 export type _TriggerStmt = UpdateStmt | InsertStmt | DeleteStmt | SelectStmt;
 
+/**
+ * @see https://sqlite.org/lang_expr.html#operators
+ */
+export type _UnaryOperator =
+  | '-'
+  | '+'
+  | '~'
+  | 'NOT';
+
 /*
  * SQLite aliases
  * -------------------------------------------------------------------------------------------------
@@ -145,10 +184,7 @@ export type Expr =
   | _QualifiedPath
   | _Path
   | _Identifier
-  /**
-   * The UnaryOperator + is a no-op, and has been omitted here.
-   * @see https://sqlite.org/lang_expr.html
-   */
+  | _UnaryExpression
   | _BinaryExpression
   | _CallExpression
   | _SequenceExpression
@@ -613,6 +649,16 @@ export type _TableSelectorClause = {
   type: '_TableSelectorClause';
   path: _Path | _Identifier;
   args: Expr[];
+};
+
+/**
+ * NOTE: The syntax diagram doesn't specify an expression after the operator, but the documentation
+ * (and logic) suggests one.
+ */
+export type _UnaryExpression = {
+  type: '_UnaryExpression';
+  operator: _UnaryOperator;
+  argument: Expr;
 };
 
 export type _UniqueClause = {
