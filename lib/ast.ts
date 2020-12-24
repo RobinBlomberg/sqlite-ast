@@ -61,7 +61,7 @@ export type _InsertOperator =
 export type _Node =
   | Node
   | _AddClause
-  | _AggregateArgs
+  | _Args
   | _AsClause
   | _BetweenExpression
   | _BinaryExpression
@@ -288,15 +288,15 @@ export type _AddClause = {
   columnDef: ColumnDef;
 };
 
-export type _AggregateArgs = {
-  type: '_AggregateArgs';
-  distinct: boolean;
-  expressions: [Expr, ...Expr[]];
-};
-
 export type _AllColumnsClause = {
   type: '_AllColumnsClause';
   tableName: _Identifier;
+};
+
+export type _Args = {
+  type: '_Args';
+  distinct: boolean;
+  args: [Expr, ...Expr[]];
 };
 
 export type _AsClause = {
@@ -338,10 +338,16 @@ export type _BlobLiteral = {
   value: string[];
 };
 
+/**
+ * According to the syntax diagram, argument expressions must be preceded by DISTINCT, which is
+ * presumably an error. We'll re-use the _Args node used in AggregateFunctionInvocation instead.
+ *
+ * @see https://sqlite.org/lang_expr.html
+ */
 export type _CallExpression = {
   type: '_CallExpression';
   functionName: _Identifier;
-  args: Expr[] | '*';
+  args: _Args | '*' | null;
   filter: null | FilterClause;
   over: null | OverClause;
 };
@@ -702,7 +708,7 @@ export type _WindowAsClause = {
 export type AggregateFunctionInvocation = {
   type: 'AggregateFunctionInvocation';
   aggregateFunc: _Identifier;
-  args: _AggregateArgs | '*' | null;
+  args: _Args | '*' | null;
   filter: null | FilterClause;
 };
 

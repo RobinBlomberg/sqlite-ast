@@ -4,14 +4,14 @@ declare function _AddClause(
   columnDef: AST.ColumnDef
 ): AST._AddClause;
 
-declare function _AggregateArgs(
-  distinct: boolean,
-  expressions: [AST.Expr, ...AST.Expr[]]
-): AST._AggregateArgs;
-
 declare function _AllColumnsClause(
   tableName: AST._Identifier
 ): AST._AllColumnsClause;
+
+declare function _Args(
+  distinct: boolean,
+  args: [AST.Expr, ...AST.Expr[]]
+): AST._Args;
 
 declare function _AsClause(
   generatedAlways: boolean,
@@ -48,7 +48,7 @@ declare function _BlobLiteral(
 
 declare function _CallExpression(
   functionName: AST._Identifier,
-  args: AST.Expr[] | '*',
+  args: AST._Args | '*' | null,
   filter: null | AST.FilterClause,
   over: null | AST.OverClause
 ): AST._CallExpression;
@@ -335,7 +335,7 @@ declare function _WindowAsClause(
 
 declare function AggregateFunctionInvocation(
   aggregateFunc: AST._Identifier,
-  args: AST._AggregateArgs | '*' | null,
+  args: AST._Args | '*' | null,
   filter: null | AST.FilterClause
 ): AST.AggregateFunctionInvocation;
 
@@ -671,7 +671,8 @@ export const BinaryOperatorPrecedence = {
 
 export const Nodes = {
   _AddClause,
-  _AggregateArgs,
+  _AllColumnsClause,
+  _Args,
   _AsClause,
   _BetweenExpression,
   _BinaryExpression,
