@@ -197,6 +197,7 @@ export type Expr =
   | _BetweenExpression
   | _InExpression
   | _ExistsExpression
+  | SelectStmt
   | _CaseExpression
   | RaiseFunction;
 
