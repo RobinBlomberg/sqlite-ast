@@ -91,11 +91,6 @@ declare function _ColumnAliasClause(
   as: AST._Identifier | null
 ): AST._ColumnAliasClause;
 
-declare function _ColumnPath(
-  tablePath: AST._Path | AST._Identifier,
-  columnName: AST._Identifier
-): AST._ColumnPath;
-
 declare function _ColumnSelectorClause(
   indexedColumns: [AST._Identifier, ...AST._Identifier[]],
   where: null | AST.Expr
@@ -238,6 +233,11 @@ declare function _PrimaryKeyConstraint(
   indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
   onConflict: null | AST.ConflictClause
 ): AST._PrimaryKeyConstraint;
+
+declare function _QualifiedPath(
+  schemaName: AST._Identifier,
+  path: AST._Path
+): AST._QualifiedPath;
 
 declare function _RenameClause(
   from: null | AST._Identifier,
@@ -652,7 +652,6 @@ export const Nodes = {
   _CollateClause,
   _CollateExpression,
   _ColumnAliasClause,
-  _ColumnPath,
   _ColumnSelectorClause,
   _DefaultClause,
   _DeferrableClause,
@@ -683,6 +682,7 @@ export const Nodes = {
   _PragmaSetter,
   _PrimaryKeyClause,
   _PrimaryKeyConstraint,
+  _QualifiedPath,
   _RenameClause,
   _SelectClause,
   _SelectCompound,

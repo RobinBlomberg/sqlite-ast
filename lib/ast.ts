@@ -47,7 +47,6 @@ export type _Node =
   | _CollateClause
   | _CollateExpression
   | _ColumnAliasClause
-  | _ColumnPath
   | _ColumnSelectorClause
   | _DefaultClause
   | _DeferrableClause
@@ -78,6 +77,7 @@ export type _Node =
   | _PragmaSetter
   | _PrimaryKeyClause
   | _PrimaryKeyConstraint
+  | _QualifiedPath
   | _RenameClause
   | _SelectClause
   | _SelectCompound
@@ -142,7 +142,7 @@ export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
 export type Expr =
   | LiteralValue
   | _BindParameter
-  | _ColumnPath
+  | _QualifiedPath
   | _Path
   | _Identifier
   /**
@@ -362,12 +362,6 @@ export type _ColumnSelectorClause = {
   where: null | Expr;
 };
 
-export type _ColumnPath = {
-  type: '_ColumnPath';
-  tablePath: _Path | _Identifier;
-  columnName: _Identifier;
-};
-
 export type _DefaultClause = {
   type: '_DefaultClause';
   expr: Expr;
@@ -539,6 +533,12 @@ export type _PrimaryKeyConstraint = {
   type: '_PrimaryKeyConstraint';
   indexedColumns: [IndexedColumn, ...IndexedColumn[]];
   onConflict: null | ConflictClause;
+};
+
+export type _QualifiedPath = {
+  type: '_QualifiedPath';
+  schemaName: _Identifier;
+  path: _Path;
 };
 
 export type _RenameClause = {
