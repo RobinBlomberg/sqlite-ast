@@ -857,12 +857,12 @@ export type LiteralValue =
   | _NumericLiteral
   | _StringLiteral
   | _BlobLiteral
-  'NULL'
-  'TRUE'
-  'FALSE'
-  'CURRENT_TIME'
-  'CURRENT_DATE'
-  'CURRENT_TIMESTAMP';
+  | 'NULL'
+  | 'TRUE'
+  | 'FALSE'
+  | 'CURRENT_TIME'
+  | 'CURRENT_DATE'
+  | 'CURRENT_TIMESTAMP';
 
 export type OrderingTerm = {
   type: 'OrderingTerm';
