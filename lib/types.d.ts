@@ -669,6 +669,7 @@ export const Nodes = {
   _JoinCompound,
   _JoinOnClause,
   _JoinUsingClause,
+  _KeywordLiteral,
   _LimitClause,
   _LimiterClause,
   _LimitTailClause,
