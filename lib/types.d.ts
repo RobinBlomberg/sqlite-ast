@@ -494,7 +494,7 @@ declare function IndexedColumn(
 ): AST.IndexedColumn;
 
 declare function InsertStmt(
-  withClause: AST.WithClause,
+  withClause: AST.WithClause | null,
   operator: AST._InsertOperator,
   path: AST._Path | AST._Identifier,
   alias: AST._Identifier | null,

@@ -904,7 +904,7 @@ export type IndexedColumn = {
 
 export type InsertStmt = {
   type: 'InsertStmt';
-  withClause: WithClause;
+  withClause: WithClause | null;
   operator: _InsertOperator;
   path: _Path | _Identifier;
   alias: _Identifier | null;
