@@ -497,15 +497,9 @@ export type _JoinUsingClause = {
   columnNames: [_Identifier, ..._Identifier[]];
 };
 
-export type _KeywordLiteral = {
+export type _KeywordLiteral<T extends string = string> = {
   type: '_KeywordLiteral';
-  value:
-    | 'NULL'
-    | 'TRUE'
-    | 'FALSE'
-    | 'CURRENT_TIME'
-    | 'CURRENT_DATE'
-    | 'CURRENT_TIMESTAMP';
+  value: T;
 };
 
 export type _LimitClause = {
@@ -926,7 +920,14 @@ export type LiteralValue =
   | _NumericLiteral
   | _StringLiteral
   | _BlobLiteral
-  | _KeywordLiteral;
+  | _KeywordLiteral<
+    | 'NULL'
+    | 'TRUE'
+    | 'FALSE'
+    | 'CURRENT_TIME'
+    | 'CURRENT_DATE'
+    | 'CURRENT_TIMESTAMP'
+  >;
 
 export type OrderingTerm = {
   type: 'OrderingTerm';
@@ -947,7 +948,7 @@ export type PragmaStmt = {
 
 export type PragmaValue = {
   type: 'PragmaValue';
-  value: _NumericLiteral | _Identifier;
+  value: _NumericLiteral | _KeywordLiteral;
 };
 
 export type QualifiedTableName = {

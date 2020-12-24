@@ -172,9 +172,9 @@ declare function _JoinUsingClause(
   columnNames: [AST._Identifier, ...AST._Identifier[]]
 ): AST._JoinUsingClause;
 
-declare function _KeywordLiteral(
-  value: 'NULL' | 'TRUE' | 'FALSE' | 'CURRENT_TIME' | 'CURRENT_DATE' | 'CURRENT_TIMESTAMP'
-): AST._KeywordLiteral
+declare function _KeywordLiteral<T extends string = string>(
+  value: T
+): AST._KeywordLiteral<T>
 
 declare function _LimitClause(
   left: AST.Expr,
@@ -525,7 +525,7 @@ declare function PragmaStmt(
 ): AST.PragmaStmt;
 
 declare function PragmaValue(
-  value: AST._NumericLiteral | AST._Identifier
+  value: AST._NumericLiteral | AST._KeywordLiteral
 ): AST.PragmaValue;
 
 declare function QualifiedTableName(
