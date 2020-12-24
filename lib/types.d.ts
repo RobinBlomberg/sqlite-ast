@@ -137,6 +137,7 @@ declare function _Identifier(
 ): AST._Identifier;
 
 declare function _InExpression(
+  argument: AST.Expr,
   negated: boolean,
   selector: AST._SelectorClause | AST._TableSelectorClause
 ): AST._InExpression;

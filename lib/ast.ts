@@ -455,6 +455,7 @@ export type _Identifier = {
 
 export type _InExpression = {
   type: '_InExpression';
+  argument: Expr;
   negated: boolean;
   selector: _SelectorClause | _TableSelectorClause;
 };
