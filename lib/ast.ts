@@ -384,7 +384,7 @@ export type _ColumnAliasClause = {
 
 export type _ColumnSelectorClause = {
   type: '_ColumnSelectorClause';
-  indexedColumns: [_Identifier, ..._Identifier[]];
+  indexedColumns: [IndexedColumn, ...IndexedColumn[]];
   where: _WhereClause | null;
 };
 

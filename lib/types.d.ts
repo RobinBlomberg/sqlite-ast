@@ -83,7 +83,7 @@ declare function _ColumnAliasClause(
 ): AST._ColumnAliasClause;
 
 declare function _ColumnSelectorClause(
-  indexedColumns: [AST._Identifier, ...AST._Identifier[]],
+  indexedColumns: [AST.IndexedColumn, ...AST.IndexedColumn[]],
   where: AST._WhereClause | null
 ): AST._ColumnSelectorClause;
 
