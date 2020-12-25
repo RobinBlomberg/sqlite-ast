@@ -583,12 +583,11 @@ declare function SimpleSelectStmt(
 ): AST.SimpleSelectStmt;
 
 declare function SqlStmt(
-  explain: boolean,
-  statement: AST._SqlStmt
+  statement: AST._Stmt
 ): AST.SqlStmt;
 
 declare function SqlStmtList(
-  statements: AST.SqlStmt[]
+  statements: (AST.SqlStmt | AST._Stmt)[]
 ): AST.SqlStmtList;
 
 declare function TableConstraint(

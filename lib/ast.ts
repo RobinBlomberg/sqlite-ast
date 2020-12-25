@@ -128,7 +128,7 @@ export type _Node =
   | _ValuesClause
   | _WindowAsClause;
 
-export type _SqlStmt =
+export type _Stmt =
   | AlterTableStmt
   | AnalyzeStmt
   | AttachStmt
@@ -1020,13 +1020,12 @@ export type SimpleSelectStmt = {
 
 export type SqlStmt = {
   type: 'SqlStmt';
-  explain: boolean;
-  statement: _SqlStmt;
+  statement: _Stmt;
 };
 
 export type SqlStmtList = {
   type: 'SqlStmtList';
-  statements: SqlStmt[];
+  statements: (SqlStmt | _Stmt)[];
 };
 
 export type TableConstraint = {
