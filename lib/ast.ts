@@ -66,7 +66,6 @@ export type _Node =
   | _BetweenExpression
   | _BinaryExpression
   | _BinaryKeywordExpression
-  | _BindParameter
   | _BlobLiteral
   | _CaseExpression
   | _CaseClause
@@ -181,7 +180,6 @@ export type CompoundOperator = 'UNION' | 'UNION ALL' | 'INTERSECT' | 'EXCEPT';
 
 export type Expr =
   | LiteralValue
-  | _BindParameter
   | _QualifiedPath
   | _Path
   | _Identifier
@@ -330,11 +328,6 @@ export type _BinaryKeywordExpression = {
   operator: 'LIKE' | 'GLOB' | 'REGEXP' | 'MATCH';
   right: Expr;
   escape: Expr | null;
-};
-
-export type _BindParameter = {
-  type: '_BindParameter';
-  bindParameter: _Identifier;
 };
 
 export type _BlobLiteral = {
