@@ -601,7 +601,7 @@ declare function UpdateStmt(
   alternate: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null,
   path: AST.QualifiedTableName,
   set: [AST._SetClause, ...AST._SetClause[]],
-  from: AST._TableQueryClause,
+  from: AST._TableQueryClause | null,
   where: AST.Expr | null,
   limiter: AST._LimiterClause | null
 ): AST.UpdateStmt;
