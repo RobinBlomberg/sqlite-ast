@@ -48,13 +48,6 @@ declare function _BlobLiteral(
   value: string[]
 ): AST._BlobLiteral;
 
-declare function _CallExpression(
-  functionName: AST._Identifier,
-  args: AST._Args | '*' | null,
-  filter: AST.FilterClause | null,
-  over: AST.OverClause | null
-): AST._CallExpression;
-
 declare function _CaseExpression(
   discriminant: AST.Expr | null,
   cases: [AST._CaseClause, ...AST._CaseClause[]],
@@ -126,6 +119,13 @@ declare function _FrameSpecExprClause(
   expr: AST.Expr,
   position: 'PRECEDING' | 'FOLLOWING'
 ): AST._FrameSpecExprClause;
+
+declare function _FunctionInvocation(
+  name: AST._Identifier,
+  args: AST._Args | '*' | null,
+  filter: AST.FilterClause | null,
+  over: AST.OverClause | null
+): AST._FunctionInvocation;
 
 declare function _GroupByClause(
   expressions: [AST.Expr, ...AST.Expr[]],
@@ -337,7 +337,7 @@ declare function _WindowAsClause(
 ): AST._WindowAsClause;
 
 declare function AggregateFunctionInvocation(
-  aggregateFunc: AST._Identifier,
+  name: AST._Identifier,
   args: AST._Args | '*' | null,
   filter: AST.FilterClause | null
 ): AST.AggregateFunctionInvocation;
@@ -572,7 +572,7 @@ declare function SelectStmt(
 ): AST.SelectStmt;
 
 declare function SimpleFunctionInvocation(
-  simpleFunc: AST._Identifier,
+  name: AST._Identifier,
   args: AST.Expr[] | '*'
 ): AST.SimpleFunctionInvocation;
 
@@ -628,10 +628,10 @@ declare function WindowDefn(
 ): AST.WindowDefn;
 
 declare function WindowFunctionInvocation(
-  windowFunc: AST._Identifier,
-  expr: AST.Expr[] | '*',
+  name: AST._Identifier,
+  args: AST.Expr[] | '*',
   filter: AST.FilterClause | null,
-  over: AST.WindowDefn | AST._Identifier
+  over: AST.OverClause
 ): AST.WindowFunctionInvocation;
 
 declare function WithClause(
@@ -681,7 +681,6 @@ export const Nodes = {
   _BinaryKeywordExpression,
   _BindParameter,
   _BlobLiteral,
-  _CallExpression,
   _CaseExpression,
   _CaseClause,
   _CastExpression,
@@ -697,6 +696,7 @@ export const Nodes = {
   _ForeignKeyConstraint,
   _FrameSpecBetweenClause,
   _FrameSpecExprClause,
+  _FunctionInvocation,
   _GroupByClause,
   _Identifier,
   _InExpression,

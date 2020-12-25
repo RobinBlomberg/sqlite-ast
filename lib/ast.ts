@@ -68,7 +68,6 @@ export type _Node =
   | _BinaryKeywordExpression
   | _BindParameter
   | _BlobLiteral
-  | _CallExpression
   | _CaseExpression
   | _CaseClause
   | _CastExpression
@@ -84,6 +83,7 @@ export type _Node =
   | _ForeignKeyConstraint
   | _FrameSpecBetweenClause
   | _FrameSpecExprClause
+  | _FunctionInvocation
   | _GroupByClause
   | _Identifier
   | _InExpression
@@ -187,7 +187,7 @@ export type Expr =
   | _Identifier
   | _UnaryExpression
   | _BinaryExpression
-  | _CallExpression
+  | _FunctionInvocation
   | _SequenceExpression
   | _CastExpression
   | _CollateExpression
@@ -342,20 +342,6 @@ export type _BlobLiteral = {
   value: string[];
 };
 
-/**
- * According to the syntax diagram, argument expressions must be preceded by DISTINCT, which is
- * presumably an error. We'll re-use the _Args node used in AggregateFunctionInvocation instead.
- *
- * @see https://sqlite.org/lang_expr.html
- */
-export type _CallExpression = {
-  type: '_CallExpression';
-  functionName: _Identifier;
-  args: _Args | '*' | null;
-  filter: FilterClause | null;
-  over: OverClause | null;
-};
-
 export type _CaseExpression = {
   type: '_CaseExpression';
   discriminant: Expr | null;
@@ -441,6 +427,20 @@ export type _FrameSpecExprClause = {
   type: '_FrameSpecExprClause';
   expr: Expr;
   position: 'PRECEDING' | 'FOLLOWING';
+};
+
+/**
+ * According to the syntax diagram, argument expressions *must* be preceded by DISTINCT, which is
+ * presumably an error. We'll re-use the _Args node used in AggregateFunctionInvocation instead.
+ *
+ * @see https://sqlite.org/lang_expr.html
+ */
+export type _FunctionInvocation = {
+  type: '_FunctionInvocation';
+  name: _Identifier;
+  args: _Args | '*' | null;
+  filter: FilterClause | null;
+  over: OverClause | null;
 };
 
 export type _GroupByClause = {
@@ -706,7 +706,7 @@ export type _WindowAsClause = {
 
 export type AggregateFunctionInvocation = {
   type: 'AggregateFunctionInvocation';
-  aggregateFunc: _Identifier;
+  name: _Identifier;
   args: _Args | '*' | null;
   filter: FilterClause | null;
 };
@@ -1007,7 +1007,7 @@ export type SelectStmt = {
 
 export type SimpleFunctionInvocation = {
   type: 'SimpleFunctionInvocation';
-  simpleFunc: _Identifier;
+  name: _Identifier;
   args: Expr[] | '*';
 };
 
@@ -1075,10 +1075,10 @@ export type WindowDefn = {
 
 export type WindowFunctionInvocation = {
   type: 'WindowFunctionInvocation';
-  windowFunc: _Identifier;
-  expr: Expr[] | '*';
+  name: _Identifier;
+  args: Expr[] | '*';
   filter: FilterClause | null;
-  over: WindowDefn | _Identifier;
+  over: OverClause;
 };
 
 export type WithClause = {
