@@ -988,7 +988,7 @@ export type ResultColumn = {
 
 export type RollbackStmt = {
   type: 'RollbackStmt';
-  savepointName: _Identifier;
+  savepointName: _Identifier | null;
 };
 
 export type SavepointStmt = {

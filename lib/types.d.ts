@@ -558,7 +558,7 @@ declare function ResultColumn(
 ): AST.ResultColumn;
 
 declare function RollbackStmt(
-  savepointName: AST._Identifier
+  savepointName: AST._Identifier | null
 ): AST.RollbackStmt;
 
 declare function SavepointStmt(
