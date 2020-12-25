@@ -292,7 +292,7 @@ export type _AddClause = {
 
 export type _AllColumnsClause = {
   type: '_AllColumnsClause';
-  tableName: _Identifier;
+  tableName: _Identifier | null;
 };
 
 export type _Args = {
@@ -983,7 +983,7 @@ export type ReleaseStmt = {
 
 export type ResultColumn = {
   type: 'ResultColumn';
-  source: Expr | _ColumnAliasClause | '*' | _AllColumnsClause;
+  source: Expr | _ColumnAliasClause | _AllColumnsClause;
 };
 
 export type RollbackStmt = {

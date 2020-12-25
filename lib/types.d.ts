@@ -5,7 +5,7 @@ declare function _AddClause(
 ): AST._AddClause;
 
 declare function _AllColumnsClause(
-  tableName: AST._Identifier
+  tableName: AST._Identifier | null
 ): AST._AllColumnsClause;
 
 declare function _Args(
@@ -554,7 +554,7 @@ declare function ReleaseStmt(
 ): AST.ReleaseStmt;
 
 declare function ResultColumn(
-  source: AST.Expr | AST._ColumnAliasClause | '*' | AST._AllColumnsClause
+  source: AST.Expr | AST._ColumnAliasClause | AST._AllColumnsClause
 ): AST.ResultColumn;
 
 declare function RollbackStmt(
