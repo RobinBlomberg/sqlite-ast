@@ -431,7 +431,7 @@ declare function CteTableName(
 
 declare function DeleteStmt(
   withClause: AST.WithClause | null,
-  qualifiedTableName: AST.QualifiedTableName,
+  name: AST.QualifiedTableName,
   where: AST.Expr | null,
   limiter: AST._LimiterClause | null
 ): AST.DeleteStmt;
@@ -599,7 +599,7 @@ declare function TypeName(
 declare function UpdateStmt(
   withClause: AST.WithClause | null,
   alternate: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null,
-  path: AST.QualifiedTableName,
+  name: AST.QualifiedTableName,
   set: [AST._SetClause, ...AST._SetClause[]],
   from: AST._TableQueryClause | null,
   where: AST.Expr | null,

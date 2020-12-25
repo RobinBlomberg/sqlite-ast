@@ -819,7 +819,7 @@ export type CteTableName = {
 export type DeleteStmt = {
   type: 'DeleteStmt';
   withClause: WithClause | null;
-  qualifiedTableName: QualifiedTableName;
+  name: QualifiedTableName;
   where: Expr | null;
   limiter: _LimiterClause | null; // Merged from DeleteStmtLimited.
 };
@@ -1037,7 +1037,7 @@ export type UpdateStmt = {
   type: 'UpdateStmt';
   withClause: WithClause | null;
   alternate: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null;
-  path: QualifiedTableName;
+  name: QualifiedTableName;
   set: [_SetClause, ..._SetClause[]];
   from: _TableQueryClause | null;
   where: Expr | null;
