@@ -1045,7 +1045,7 @@ export type UpdateStmt = {
   alternate: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null;
   name: QualifiedTableName;
   set: [_SetClause, ..._SetClause[]];
-  from: _TableQueryClause | null;
+  from: [TableOrSubquery, ...TableOrSubquery[]] | JoinClause | null;
   where: _WhereClause | null;
   limiter: _LimiterClause | null; // Merged from UpdateStmtLimited.
 };
