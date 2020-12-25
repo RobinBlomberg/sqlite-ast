@@ -84,7 +84,7 @@ declare function _ColumnAliasClause(
 
 declare function _ColumnSelectorClause(
   indexedColumns: [AST._Identifier, ...AST._Identifier[]],
-  where: AST.Expr | null
+  where: AST._WhereClause | null
 ): AST._ColumnSelectorClause;
 
 declare function _DefaultClause(
@@ -247,7 +247,7 @@ declare function _SelectClause(
   modifier: 'DISTINCT' | 'ALL' | null,
   resultColumns: [AST.ResultColumn, ...AST.ResultColumn[]],
   from: AST.TableOrSubquery[],
-  where: AST.Expr | null,
+  where: AST._WhereClause | null,
   groupBy: AST._GroupByClause | null,
   window: AST._WindowAsClause[]
 ): AST._SelectClause;
@@ -316,7 +316,7 @@ declare function _UniqueConstraint(
 
 declare function _UpdateSetClause(
   set: [AST._SetClause, ...AST._SetClause[]],
-  where: AST.Expr | null
+  where: AST._WhereClause | null
 ): AST._UpdateSetClause;
 
 declare function _ValueClause(
@@ -326,6 +326,10 @@ declare function _ValueClause(
 declare function _ValuesClause(
   rows: [AST._ValueClause, ...AST._ValueClause[]]
 ): AST._ValuesClause;
+
+declare function _WhereClause(
+  expr: AST.Expr
+): Ast._WhereClause;
 
 declare function _WindowAsClause(
   windowName: AST._Identifier,
@@ -432,7 +436,7 @@ declare function CteTableName(
 declare function DeleteStmt(
   withClause: AST.WithClause | null,
   name: AST.QualifiedTableName,
-  where: AST.Expr | null,
+  where: AST._WhereClause | null,
   limiter: AST._LimiterClause | null
 ): AST.DeleteStmt;
 
@@ -467,7 +471,7 @@ declare function FactoredSelectStmt(
 ): AST.FactoredSelectStmt;
 
 declare function FilterClause(
-  where: AST.Expr
+  where: AST._WhereClause
 ): AST.FilterClause;
 
 declare function ForeignKeyClause(
@@ -602,7 +606,7 @@ declare function UpdateStmt(
   name: AST.QualifiedTableName,
   set: [AST._SetClause, ...AST._SetClause[]],
   from: AST._TableQueryClause | null,
-  where: AST.Expr | null,
+  where: AST._WhereClause | null,
   limiter: AST._LimiterClause | null
 ): AST.UpdateStmt;
 
@@ -734,6 +738,7 @@ export const Nodes = {
   _UpdateSetClause,
   _ValueClause,
   _ValuesClause,
+  _WhereClause,
   _WindowAsClause,
   AggregateFunctionInvocation,
   AlterTableStmt,

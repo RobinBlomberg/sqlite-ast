@@ -125,6 +125,7 @@ export type _Node =
   | _UpdateSetClause
   | _ValueClause
   | _ValuesClause
+  | _WhereClause
   | _WindowAsClause;
 
 export type _Stmt =
@@ -384,7 +385,7 @@ export type _ColumnAliasClause = {
 export type _ColumnSelectorClause = {
   type: '_ColumnSelectorClause';
   indexedColumns: [_Identifier, ..._Identifier[]];
-  where: Expr | null;
+  where: _WhereClause | null;
 };
 
 export type _DefaultClause = {
@@ -586,7 +587,7 @@ export type _SelectClause = {
   modifier: 'DISTINCT' | 'ALL' | null;
   resultColumns: [ResultColumn, ...ResultColumn[]];
   from: TableOrSubquery[];
-  where: Expr | null;
+  where: _WhereClause | null;
   groupBy: _GroupByClause | null;
   window: _WindowAsClause[];
 };
@@ -673,7 +674,7 @@ export type _UniqueConstraint = {
 export type _UpdateSetClause = {
   type: '_UpdateSetClause';
   set: [_SetClause, ..._SetClause[]];
-  where: Expr | null;
+  where: _WhereClause | null;
 };
 
 export type _ValueClause = {
@@ -684,6 +685,11 @@ export type _ValueClause = {
 export type _ValuesClause = {
   type: '_ValuesClause';
   rows: [_ValueClause, ..._ValueClause[]];
+};
+
+export type _WhereClause = {
+  type: '_WhereClause';
+  expr: Expr;
 };
 
 export type _WindowAsClause = {
@@ -820,7 +826,7 @@ export type DeleteStmt = {
   type: 'DeleteStmt';
   withClause: WithClause | null;
   name: QualifiedTableName;
-  where: Expr | null;
+  where: _WhereClause | null;
   limiter: _LimiterClause | null; // Merged from DeleteStmtLimited.
 };
 
@@ -864,7 +870,7 @@ export type FactoredSelectStmt = {
 
 export type FilterClause = {
   type: 'FilterClause';
-  where: Expr;
+  where: _WhereClause;
 };
 
 export type ForeignKeyClause = {
@@ -1040,7 +1046,7 @@ export type UpdateStmt = {
   name: QualifiedTableName;
   set: [_SetClause, ..._SetClause[]];
   from: _TableQueryClause | null;
-  where: Expr | null;
+  where: _WhereClause | null;
   limiter: _LimiterClause | null; // Merged from UpdateStmtLimited.
 };
 
