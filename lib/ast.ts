@@ -585,7 +585,7 @@ export type _SelectClause = {
   type: '_SelectClause';
   modifier: 'DISTINCT' | 'ALL' | null;
   resultColumns: [ResultColumn, ...ResultColumn[]];
-  from: TableOrSubquery | null;
+  from: TableOrSubquery[];
   where: Expr | null;
   groupBy: _GroupByClause | null;
   window: _WindowAsClause[];

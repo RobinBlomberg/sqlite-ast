@@ -246,7 +246,7 @@ declare function _RenameClause(
 declare function _SelectClause(
   modifier: 'DISTINCT' | 'ALL' | null,
   resultColumns: [AST.ResultColumn, ...AST.ResultColumn[]],
-  from: AST.TableOrSubquery | null,
+  from: AST.TableOrSubquery[],
   where: AST.Expr | null,
   groupBy: AST._GroupByClause | null,
   window: AST._WindowAsClause[]
