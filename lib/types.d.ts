@@ -90,7 +90,7 @@ declare function _CollateExpression(
 
 declare function _ColumnAliasClause(
   expr: AST.Expr,
-  as: AST._Identifier | null
+  as: AST._Identifier
 ): AST._ColumnAliasClause;
 
 declare function _ColumnSelectorClause(
