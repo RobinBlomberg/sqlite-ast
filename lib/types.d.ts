@@ -597,8 +597,8 @@ declare function TypeName(
 ): AST.TypeName;
 
 declare function UpdateStmt(
-  withClause: AST.WithClause,
-  updateOr: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null,
+  withClause: AST.WithClause | null,
+  alternate: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null,
   path: AST.QualifiedTableName,
   set: [AST._SetClause, ...AST._SetClause[]],
   from: AST._TableQueryClause,

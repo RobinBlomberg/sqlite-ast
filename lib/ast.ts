@@ -1035,8 +1035,8 @@ export type TypeName = {
 
 export type UpdateStmt = {
   type: 'UpdateStmt';
-  withClause: WithClause;
-  updateOr: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null;
+  withClause: WithClause | null;
+  alternate: 'ABORT' | 'FAIL' | 'IGNORE' | 'REPLACE' | 'ROLLBACK' | null;
   path: QualifiedTableName;
   set: [_SetClause, ..._SetClause[]];
   from: _TableQueryClause;
