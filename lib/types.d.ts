@@ -13,6 +13,10 @@ declare function _Args(
   args: [AST.Expr, ...AST.Expr[]]
 ): AST._Args;
 
+declare function _ArrayExpression(
+  expressions: [AST.Expr, ...AST.Expr[]]
+): AST._ArrayExpression;
+
 declare function _AsClause(
   generatedAlways: boolean,
   as: AST.Expr,
@@ -260,10 +264,6 @@ declare function _SelectCompound(
 declare function _SelectorClause(
   selector: AST.SelectStmt | AST.Expr[]
 ): AST._SelectorClause;
-
-declare function _SequenceExpression(
-  expressions: [AST.Expr, ...AST.Expr[]]
-): AST._SequenceExpression;
 
 declare function _SetClause(
   columns: AST._Identifier | AST.ColumnNameList,
@@ -675,6 +675,7 @@ export const Nodes = {
   _AddClause,
   _AllColumnsClause,
   _Args,
+  _ArrayExpression,
   _AsClause,
   _BetweenExpression,
   _BinaryExpression,
@@ -724,7 +725,6 @@ export const Nodes = {
   _SelectClause,
   _SelectCompound,
   _SelectorClause,
-  _SequenceExpression,
   _SetClause,
   _StringLiteral,
   _TableCallClause,

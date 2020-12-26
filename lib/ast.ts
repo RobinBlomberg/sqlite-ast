@@ -62,6 +62,7 @@ export type _Node =
   | Node
   | _AddClause
   | _Args
+  | _ArrayExpression
   | _AsClause
   | _BetweenExpression
   | _BinaryExpression
@@ -111,7 +112,6 @@ export type _Node =
   | _SelectClause
   | _SelectCompound
   | _SelectorClause
-  | _SequenceExpression
   | _SetClause
   | _StringLiteral
   | _TableCallClause
@@ -187,7 +187,7 @@ export type Expr =
   | _UnaryExpression
   | _BinaryExpression
   | _FunctionInvocation
-  | _SequenceExpression
+  | _ArrayExpression
   | _CastExpression
   | _CollateExpression
   | _BinaryKeywordExpression
@@ -298,6 +298,11 @@ export type _Args = {
   type: '_Args';
   distinct: boolean;
   args: [Expr, ...Expr[]];
+};
+
+export type _ArrayExpression = {
+  type: '_ArrayExpression';
+  expressions: [Expr, ...Expr[]];
 };
 
 export type _AsClause = {
@@ -601,11 +606,6 @@ export type _SelectCompound = {
 export type _SelectorClause = {
   type: '_SelectorClause';
   selector: SelectStmt | Expr[];
-};
-
-export type _SequenceExpression = {
-  type: '_SequenceExpression';
-  expressions: [Expr, ...Expr[]];
 };
 
 export type _SetClause = {
