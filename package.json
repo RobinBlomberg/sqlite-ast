@@ -1,22 +1,58 @@
 {
   "name": "@robinblomberg/sqlite-ast",
-  "version": "0.48.0",
-  "description": "",
+  "version": "0.49.0",
   "type": "module",
-  "main": "lib/index.js",
-  "types": "lib/types.d.ts",
+  "main": "src/index.js",
+  "types": "src/types.d.ts",
   "author": "Robin Blomberg",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RobinBlomberg/sqlite-ast.git"
   },
-  "keywords": [],
   "bugs": {
     "url": "https://github.com/RobinBlomberg/sqlite-ast/issues"
   },
   "homepage": "https://github.com/RobinBlomberg/sqlite-ast#readme",
   "scripts": {
-    "test": "node ./lib/index.js"
-  }
+    "ci": "run-p ci:*",
+    "ci:eslint": "pnpm lint:eslint --max-warnings=0 --report-unused-disable-directives",
+    "ci:prettier": "pnpm lint:prettier",
+    "fix": "run-p fix:*",
+    "fix:eslint": "eslint --fix src",
+    "fix:prettier": "prettier --write src",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint src",
+    "lint:prettier": "prettier --check src",
+    "prepublishOnly": "pnpm run ci"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@robinblomberg/eslint-config-prettier": "^0.1.4",
+    "@robinblomberg/eslint-config-robinblomberg": "^0.23.2",
+    "@robinblomberg/prettier-config": "^0.2.0-beta1",
+    "@types/node": "^20.10.6",
+    "eslint": "^8.56.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@robinblomberg/robinblomberg",
+      "@robinblomberg/prettier"
+    ],
+    "rules": {
+      "no-unused-vars": [
+        1,
+        {
+          "args": "none",
+          "argsIgnorePattern": "^_.*$",
+          "vars": "all",
+          "varsIgnorePattern": "^AST$"
+        }
+      ]
+    }
+  },
+  "prettier": "@robinblomberg/prettier-config"
 }
